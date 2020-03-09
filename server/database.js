@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const URI = 'mongodb://localhost/academic_alerts';
+const URI = 'mongodb://localhost/test_complete';
 
 mongoose.connect(URI)
     .then(db => console.log("DB is conected"))
