@@ -45,7 +45,7 @@ alertController.editAlert = async (req, res) =>{
 
 // /DELETE user
 alertController.deleteAlert = async (req, res) =>{
-    await alert.findByIdAndRemove(req.body.id);
+    await alert.findByIdAndRemove(req.params.id);
     res.json({
         status: "Alert Deleted"
     })
