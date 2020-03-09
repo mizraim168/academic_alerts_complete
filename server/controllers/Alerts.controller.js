@@ -15,7 +15,13 @@ alertController.getAlert = async (req , res) =>{
 }
 // /POST new alert
 alertController.createAlert = async (req, res) => {
-    const newAlert = new alert(req.body);
+    const newAlert = new alert({
+        matricula: req.body.matricula,
+        student_name: req.body.student_name,
+        educational_program: req.body.educational_program,
+        incidence: req.body.incidence,
+        tracing: req.body.tracing
+    });
     await newAlert.save();
     res.json({
         status: "Alert saved"
