@@ -15,10 +15,11 @@ import { UsersComponent } from './components/users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
 import { HomeComponent } from './components/home/home.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'alerts', component: UsersComponent },
+  { path: 'alerts', component: AlertsComponent },
 
 ];
 
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     UsersComponent,
-    HomeComponent
+    HomeComponent,
+    AlertsComponent
   ],
   imports: [
     RouterModule.forRoot(

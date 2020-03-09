@@ -14,7 +14,8 @@ app.use(express.json())
 app.use(cors({origin: 'http://localhost:4200'}));
 
 //Routes
-app.use('/users',require('./routes/main.routes'));
+app.use('/users',require('./routes/users.routes'));
+app.use('/alerts',require('./routes/alert.routes'));
 
 app.listen(3000, ()=> {
     console.log("Server On Port ", app.get('port'))

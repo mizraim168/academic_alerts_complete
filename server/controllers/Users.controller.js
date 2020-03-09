@@ -71,8 +71,8 @@ transporter.sendMail(mailOptions, function(error, info){
 userController.editUser = async (req, res) =>{
     const {id} = req.params;
     const oneUser = {
-        email: req.params.email,
-        password: req.params.password
+        email: req.body.email,
+        password: req.body.password
     };
     await user.findByIdAndUpdate(id, {$set: oneUser}, {new:true} );
     res.json({
