@@ -14,15 +14,16 @@ declare let M: any;
 })
 export class AlertsComponent implements OnInit {
 
+ 
+
   constructor(public alertService: AlertService) { }
 
   ngOnInit(): void {
     this.getAlerts();
 
-
-    
-
   }
+
+ 
 
   addAlert(form: NgForm){
     if (form.value._id) {

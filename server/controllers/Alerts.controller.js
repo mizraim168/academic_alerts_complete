@@ -2,6 +2,7 @@ const alert = require('../models/Alerts');
 
 const alertController = {};
 
+
 // Get current date for status
 let hoy = new Date();
 let dd = hoy.getDate();
@@ -61,5 +62,7 @@ alertController.deleteAlert = async (req, res) =>{
         status: "Alert Deleted"
     })
 }
+
+
  
 module.exports = alertController;
