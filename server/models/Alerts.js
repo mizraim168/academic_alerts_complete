@@ -7,7 +7,7 @@ const alerts = new Schema({
     educational_program: { type: String, required: true },  
     incidence: { type: String, required: true },
     tracing: { type: String, required: true },
-    date: {type: Date}
+    date: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Alerts', alerts);

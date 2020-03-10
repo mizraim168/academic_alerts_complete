@@ -17,11 +17,13 @@ import { from } from 'rxjs';
 import { HomeComponent } from './components/home/home.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { MyFollowUpComponent } from './components/my-follow-up/my-follow-up.component';
+import { GeneralFollowComponent } from './components/general-follow/general-follow.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'alerts', component: AlertsComponent },
-  { path: 'MyFollow', component: MyFollowUpComponent }
+  { path: 'MyFollow', component: MyFollowUpComponent },
+  { path: 'GeneralFollow', component: GeneralFollowComponent }
 
 ];
 
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     UsersComponent,
     HomeComponent,
     AlertsComponent,
-    MyFollowUpComponent
+    MyFollowUpComponent,
+    GeneralFollowComponent
   ],
   imports: [
     RouterModule.forRoot(

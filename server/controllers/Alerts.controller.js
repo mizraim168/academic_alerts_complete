@@ -7,8 +7,10 @@ let hoy = new Date();
 let dd = hoy.getDate();
 let mm = hoy.getMonth()+1;
 let yyyy = hoy.getFullYear();
+let hr = hoy.getHours();
+let min = hoy.getMinutes();
 
-let fulldate = dd + '/' + mm + '/' + yyyy;
+// let fulldate = dd + '/' + mm + '/' + yyyy ;
 
 // /GET all alerts
 
@@ -29,7 +31,7 @@ alertController.createAlert = async (req, res) => {
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
         tracing: req.body.tracing,
-        date: fulldate
+        // date: fulldate
     });
     await newAlert.save();
     res.json({
