@@ -2,6 +2,14 @@ const alert = require('../models/Alerts');
 
 const alertController = {};
 
+// Get current date for status
+let hoy = new Date();
+let dd = hoy.getDate();
+let mm = hoy.getMonth()+1;
+let yyyy = hoy.getFullYear();
+
+let fulldate = dd + '/' + mm + '/' + yyyy;
+
 // /GET all alerts
 
 alertController.getAlerts = async (req, res) =>{
@@ -20,7 +28,8 @@ alertController.createAlert = async (req, res) => {
         student_name: req.body.student_name,
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
-        tracing: req.body.tracing
+        tracing: req.body.tracing,
+        date: fulldate
     });
     await newAlert.save();
     res.json({

@@ -6,7 +6,8 @@ const alerts = new Schema({
     student_name: { type: String, required: false },
     educational_program: { type: String, required: true },  
     incidence: { type: String, required: true },
-    tracing: { type: String, required: true }
+    tracing: { type: String, required: true },
+    date: {type: Date}
 });
 
 module.exports = mongoose.model('Alerts', alerts);

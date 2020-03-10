@@ -1,19 +1,19 @@
-
+<!-- 
+  
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="card horizontal">
                 <div class="card-content">
-                    <!-- <form #userForm ="ngForm" (ngSubmit)="addUser(userForm)"> -->
-                    <form #alertForm ="ngForm">
+                    <form #alertForm ="ngForm" class="col s12">
                         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "alertService.selectedAlert._id">
                         <div class="row">
-                            <div class="input-field">
+                            <div class="input-field col s6">
                                 <input type="text" name="matricula" #matricula="ngModel" [(ngModel)]="alertService.selectedAlert.matricula" placeholder="Matricula" >
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field">
+                            <div class="input-field col s6">
                                 <input type="text" name="student_name" #student_name="ngModel" [(ngModel)]="alertService.selectedAlert.student_name" placeholder="Student name" >
                             </div>
                         </div>
@@ -42,35 +42,91 @@
                 </div>
         </div>
 </div>
+ -->
 
-<div class="col s7">
-    <table class="striped responsive-table">
-        <thead>
-            <th>matricula</th>
-            <th>Student name</th>
-            <th>Educational program</th>
-            <th>Incidence</th>
-            <th>Tracing</th>
-            <th>Actions</th>
-            
-        </thead>
-        <tbody>
-            <tr *ngFor="let alert of alertService.alerts">
-                <td>{{alert.matricula}}</td>
-                <td>{{alert.student_name}}</td>
-                <td>{{alert.educational_program}}</td>
-                <td>{{alert.incidence}}</td>
-                <td>{{alert.tracing}}</td>
-                <td>
-                    <a (click)="editAlert(alert)" >
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a (click)="deleteAlert(alert._id)" >
-                        <i class="material-icons">delete</i>
-                    </a>
-                </td>
-               
-            </tr>
-        </tbody>
-    </table>
+
+<div class="container">
+    <h1 class="title">Create a new alert</h1><br>
+    <div class="row">
+        <form #alertForm ="ngForm" class="col s12">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "alertService.selectedAlert._id">
+        <div class="row">
+            <div class="input-field col s6">
+                <input type="number" name="matricula" #matricula="ngModel" [(ngModel)]="alertService.selectedAlert.matricula" placeholder="Matricula" >
+            <label for="first_name">Matricula</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="student_name" #student_name="ngModel" [(ngModel)]="alertService.selectedAlert.student_name" placeholder="Student name" >
+            <label for=">Student name">Student name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="educational_program" #educational_program="ngModel" [(ngModel)]="alertService.selectedAlert.educational_program" placeholder="Educational program" >
+            <label for="Educational program">Educational program</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="incidence" #incidence="ngModel" [(ngModel)]="alertService.selectedAlert.incidence" placeholder="Incidence" >
+            <label for="Incidence">Incidence</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="tracing" #tracing="ngModel" [(ngModel)]="alertService.selectedAlert.tracing" placeholder="Tracing" >
+            <label for="tracing">Tracing</label>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col s12">
+
+            <div class="input-field inline">
+                <button class="btn right" (click)="resetForm(alertForm)"> <i class="material-icons right">cached</i>Reset</button>
+                <button class="btn right" (click)="addAlert(alertForm)"> <i class="material-icons right">add</i>Save alert</button>
+
+            </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    
+    <h1 class="title">My alerts</h1>
+
+    <a class="waves-effect waves-light btn"><i class="material-icons right">cloud_download</i>Download report</a>
+
+    <div class="row">
+        <table class="striped responsive-table">
+            <thead>
+                <th>matricula</th>
+                <th>Student name</th>
+                <th>Educational program</th>
+                <th>Incidence</th>
+                <th>Tracing</th>
+                <th>Actions</th>
+                
+            </thead>
+            <tbody>
+                <tr *ngFor="let alert of alertService.alerts">
+                    <td>{{alert.matricula}}</td>
+                    <td>{{alert.student_name}}</td>
+                    <td>{{alert.educational_program}}</td>
+                    <td>{{alert.incidence}}</td>
+                    <td>{{alert.tracing}}</td>
+                    <td>
+                        <a (click)="editAlert(alert)" >
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <a (click)="deleteAlert(alert._id)" >
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

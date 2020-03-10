@@ -4,6 +4,8 @@ import {Alert} from '../../models/alert';
 import { NgForm } from '@angular/forms';
 
 declare let M: any;
+
+
 @Component({
   selector: 'app-alerts',
   templateUrl: './alerts.component.html',
@@ -16,6 +18,10 @@ export class AlertsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlerts();
+
+
+    
+
   }
 
   addAlert(form: NgForm){
@@ -44,7 +50,7 @@ export class AlertsComponent implements OnInit {
     .subscribe(res =>{
       this.alertService.alerts = res as Alert[];
       console.log(res);
-      
+   
     })
   }
   editAlert(alert : Alert){
@@ -64,6 +70,7 @@ export class AlertsComponent implements OnInit {
     }
 
   }
+
 
   //clean form after submit
   resetForm(form?: NgForm){
