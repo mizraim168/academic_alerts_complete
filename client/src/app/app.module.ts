@@ -18,12 +18,21 @@ import { HomeComponent } from './components/home/home.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { MyFollowUpComponent } from './components/my-follow-up/my-follow-up.component';
 import { GeneralFollowComponent } from './components/general-follow/general-follow.component';
+import { MainComponent } from './components/main/main.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'alerts', component: AlertsComponent },
-  { path: 'MyFollow', component: MyFollowUpComponent },
-  { path: 'GeneralFollow', component: GeneralFollowComponent }
+  //Roting loggin with another pages
+  { path: '', component: UsersComponent },
+  { path: 'registration', component: RegistrationComponent },
+  {path: 'main', component: MainComponent,
+  children: [
+    { path: 'home', component: HomeComponent },
+    { path: 'alerts', component: AlertsComponent },
+    { path: 'MyFollow', component: MyFollowUpComponent },
+    { path: 'GeneralFollow', component: GeneralFollowComponent }
+  ]}
+
 
 ];
 
@@ -34,7 +43,9 @@ const appRoutes: Routes = [
     HomeComponent,
     AlertsComponent,
     MyFollowUpComponent,
-    GeneralFollowComponent
+    GeneralFollowComponent,
+    MainComponent,
+    RegistrationComponent
   ],
   imports: [
     RouterModule.forRoot(
