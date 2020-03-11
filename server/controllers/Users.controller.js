@@ -1,7 +1,7 @@
 const user = require('../models/Users');
 const nodemailer = require("nodemailer");
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 10; //for production mode set 12 saltRounds
 
 const userController = {};
 

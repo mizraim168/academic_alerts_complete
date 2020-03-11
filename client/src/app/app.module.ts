@@ -19,11 +19,13 @@ import { AlertsComponent } from './components/alerts/alerts.component';
 import { MyFollowUpComponent } from './components/my-follow-up/my-follow-up.component';
 import { GeneralFollowComponent } from './components/general-follow/general-follow.component';
 import { MainComponent } from './components/main/main.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const appRoutes: Routes = [
   //Roting loggin with another pages
-  { path: '', component: UsersComponent },
+  { path: '', component: LoginComponent },
+  { path: 'users', component: UsersComponent },
   {path: 'main', component: MainComponent,
   children: [
     { path: 'home', component: HomeComponent },
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
     MyFollowUpComponent,
     GeneralFollowComponent,
     MainComponent,
+    LoginComponent,
 
   ],
   imports: [
