@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef ,ViewChild } from '@angular/core';
 import {AlertService} from '../../services/alert.service';
 import {Alert} from '../../models/alert';
 import { NgForm } from '@angular/forms';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas';  
 
 declare let M: any;
-
+declare let jspdf: any; 
 
 @Component({
   selector: 'app-alerts',
@@ -14,7 +16,7 @@ declare let M: any;
 })
 export class AlertsComponent implements OnInit {
 
- 
+  
 
   constructor(public alertService: AlertService) { }
 
@@ -22,6 +24,25 @@ export class AlertsComponent implements OnInit {
     this.getAlerts();
 
   }
+
+  createReport()  
+  {  
+    // let data = document.getElementById('report');  
+    // html2canvas(data).then(canvas => {  
+    //   Few necessary setting options  
+    //   let imgWidth = 208;   
+    //   let pageHeight = 295;    
+    //   let imgHeight = canvas.height * imgWidth / canvas.width;  
+    //   let heightLeft = imgHeight;  
+  
+    //   const contentDataURL = canvas.toDataURL('image/png')  
+    //   // let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+    //   let position = 0;  
+    //   pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+    //   // pdf.save('Report.pdf'); // Generated PDF   
+    // });  
+
+  }  
 
  
 

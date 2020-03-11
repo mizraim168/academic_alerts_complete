@@ -48,7 +48,7 @@
 <div class="container">
     <h1 class="title">Create a new alert</h1><br>
     <div class="row">
-        <form #alertForm ="ngForm" class="col s12">
+        <form #alertForm ="ngForm" class="col s12" >
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "alertService.selectedAlert._id">
         <div class="row">
             <div class="input-field col s6">
@@ -98,11 +98,11 @@
     
         <h1 class="title">My alerts</h1>
 
-        <a class="waves-effect waves-light btn"  ><i class="material-icons right">cloud_download</i>Download report</a>
+        <a class="waves-effect waves-light btn" (click)="createReport()" ><i class="material-icons right">cloud_download</i>Download report</a>
 
-        <div class="row" >
-            <table class="striped responsive-table" >
-                <thead>
+        <div class="row"   >
+            <table class="striped responsive-table" id="report" >
+                <thead >
                     <th>matricula</th>
                     <th>Student name</th>
                     <th>Educational program</th>
@@ -111,7 +111,7 @@
                     <th>Actions</th>
                     
                 </thead>
-                <tbody>
+                <tbody >
                     <tr *ngFor="let alert of alertService.alerts">
                         <td>{{alert.matricula}}</td>
                         <td>{{alert.student_name}}</td>
@@ -133,4 +133,30 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="alertService.alerts.length==-1">
+    <table class="striped responsive-table" >
+        <thead>
+            <th>matricula</th>
+            <th>Student name</th>
+            <th>Educational program</th>
+            <th>Incidence</th>
+            <th>Tracing</th>
+    
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let alert of alertService.alerts">
+                <td>{{alert.matricula}}</td>
+                <td>{{alert.student_name}}</td>
+                <td>{{alert.educational_program}}</td>
+                <td>{{alert.incidence}}</td>
+                <td>{{alert.tracing}}</td>
+                
+            
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
