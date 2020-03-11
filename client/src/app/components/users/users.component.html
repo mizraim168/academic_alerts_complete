@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="title">Welcome to acedemic alerts</h1>
-    <h1 class="title">LogIn</h1>
+    <h1 class="title">Registration</h1>
     <div class="row">
         
         <div class="card  blue-grey lighten-5">
@@ -9,12 +9,32 @@
                 <form #userForm ="ngForm">
                     <div class="row">
                         <div class="input-field">
-                            <input type="text" name="email" #email="ngModel" [(ngModel)]="userService.selectedUser.email" placeholder="Ingresa tu email" >
+                            <input type="text" name="name" #name="ngModel" [(ngModel)]="userService.selectedUser.name" placeholder="Put your name" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field">
-                            <input type="password" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" placeholder="Ingresa tu contraseña" >
+                            <input type="text" name="lastname" #lastname="ngModel" [(ngModel)]="userService.selectedUser.lastname" placeholder="Put your lastname" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input type="text" name="motherlastname" #motherlastname="ngModel" [(ngModel)]="userService.selectedUser.motherlastname" placeholder="puts your mother´s lastname" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input type="password" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" placeholder="Create a password" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input type="password" name="confirm_password"  placeholder="Confirm the password" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input type="text" name="role" #role="ngModel" [(ngModel)]="userService.selectedUser.role" placeholder="Put your rol" >
                         </div>
                     </div>
 

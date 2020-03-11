@@ -1,5 +1,7 @@
 const user = require('../models/Users');
 const nodemailer = require("nodemailer");
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const userController = {};
 
@@ -35,13 +37,22 @@ userController.getUser = async (req , res) =>{
 }
 // /POST new user
 userController.createUser = async (req, res) => {
-    const newUser = new user(req.body);
+    let pass = req.body.password;
+    const hash = bcrypt.hashSync(pass, saltRounds);
+    const OneUser = {
+        name: req.body.name,
+        lastname: req.body.lastname,
+        motherlastname: req.body.motherlastname,
+        password: hash,
+        role: req.body.role
+    }
+    const newUser = new user(OneUser)
     await newUser.save();
     
     let transporter = nodemailer.createTransport({
-       host: 'smtp.googlemail.com',
-       port: 465,
-       secure: true, // use SSL
+        host: 'smtp.googlemail.com',
+        port: 465,
+        secure: true, // use SSL
         auth: {
             user: 'testarv63@gmail.com',
             pass: 'linkinpark4'
@@ -66,6 +77,7 @@ transporter.sendMail(mailOptions, function(error, info){
     res.json({
         status: "User saved"
     });
+
 }
 // /PUT update user
 userController.editUser = async (req, res) =>{
@@ -76,7 +88,7 @@ userController.editUser = async (req, res) =>{
         motherlastname: req.body.motherlastname,
         password: req.body.password,
         confirm_password: req.body.confirm_password,
-        role: req.body.role,
+        role: req.body.role
     };
     await user.findByIdAndUpdate(id, {$set: oneUser}, {new:true} );
     res.json({

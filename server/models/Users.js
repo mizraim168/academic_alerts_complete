@@ -9,7 +9,6 @@ const users = new Schema({
     lastname: {type: String, required: true},
     motherlastname: {type: String, required: true},
     password: {type: String, required:true},
-    confirm_password: {type: String, required:true},
     role: {type: String, required: true},
     highdate: {type: Date,  default: Date.now}
 });
