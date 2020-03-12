@@ -134,29 +134,5 @@
     </div>
 </div>
 
-<div *ngIf="alertService.alerts.length==-1">
-    <table class="striped responsive-table" >
-        <thead>
-            <th>matricula</th>
-            <th>Student name</th>
-            <th>Educational program</th>
-            <th>Incidence</th>
-            <th>Tracing</th>
-    
-            
-        </thead>
-        <tbody>
-            <tr *ngFor="let alert of alertService.alerts">
-                <td>{{alert.matricula}}</td>
-                <td>{{alert.student_name}}</td>
-                <td>{{alert.educational_program}}</td>
-                <td>{{alert.incidence}}</td>
-                <td>{{alert.tracing}}</td>
-                
-            
-            </tr>
-        </tbody>
-    </table>
-</div>
 
 
