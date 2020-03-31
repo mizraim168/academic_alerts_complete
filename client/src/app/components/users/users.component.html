@@ -24,6 +24,11 @@
                     </div>
                     <div class="row">
                         <div class="input-field">
+                            <input type="text" name="email" #email="ngModel" [(ngModel)]="userService.selectedUser.email" placeholder="puts your email" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
                             <input type="password" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" placeholder="Create a password" >
                         </div>
                     </div>
@@ -34,7 +39,13 @@
                     </div>
                     <div class="row">
                         <div class="input-field">
-                            <input type="text" name="role" #role="ngModel" [(ngModel)]="userService.selectedUser.role" placeholder="Put your rol" >
+                            <select name="role" #role="ngModel" [(ngModel)]="userService.selectedUser.role" >
+                              <option value="" disabled selected>Choose your rol in the university</option>
+                              <option value="coodinator">Coodinator</option>
+                              <option value="director">Director</option>
+                              <option value="teacher">Teacher</option>
+                            </select>
+                            <label>Choose status</label>
                         </div>
                     </div>
 
@@ -43,7 +54,7 @@
                             
                             <div class="input-field">
                                 
-                                <button class="btn left" [routerLink]="'/main/home'" (click)="addUser(userForm)">Save User</button>
+                                <button class="btn left" [routerLink]="'/'" (click)="addUser(userForm)">Save User</button>
                             </div>
        
 

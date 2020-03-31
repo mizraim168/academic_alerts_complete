@@ -10,6 +10,8 @@ const alertController = require('../controllers/Alerts.controller');
     router.put('/:id', userController.editUser);
     router.delete('/:id', userController.deleteUser);
 
+    router.post('/login' , userController.login);
+
 
 
 module.exports = router;

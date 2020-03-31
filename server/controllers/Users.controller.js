@@ -1,6 +1,8 @@
 const user = require('../models/Users');
 const nodemailer = require("nodemailer");
+const jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
+const Secret_Key = 'secret_key_utags';
 const saltRounds = 10; //for production mode set 12 saltRounds
 
 const userController = {};
@@ -37,14 +39,26 @@ userController.getUser = async (req , res) =>{
 }
 // /POST new user
 userController.createUser = async (req, res) => {
+    // create hash password
     let pass = req.body.password;
     const hash = bcrypt.hashSync(pass, saltRounds);
+    // end hash password
+    const expiresIn = 24 * 60 * 60;
+    const id = req.params;
+    //Create token access
+    const accesToken = jwt.sign(id , Secret_Key, {
+        expiresIn: expiresIn
+    });
+
     const OneUser = {
         name: req.body.name,
         lastname: req.body.lastname,
         motherlastname: req.body.motherlastname,
+        email: req.body.email,
         password: hash,
-        role: req.body.role
+        role: req.body.role,
+        accesToken: accesToken,
+        expiresIn: expiresIn
     }
     const newUser = new user(OneUser)
     await newUser.save();
@@ -64,6 +78,8 @@ var mailOptions = {
     to: 'mizraimeliab168@gmail.com', // list of receivers
     subject: 'Hello ✔', // Subject line
     html: emailMessage // html body
+
+    
 };
 
 
@@ -75,9 +91,58 @@ transporter.sendMail(mailOptions, function(error, info){
     console.log('Message sent: ' + info.response);
 });
     res.json({
-        status: "User saved"
+        status: "User saved",
+        token: accesToken
     });
+    return OneUser.password;
 
+}
+
+
+//POST USER NEW (login system)
+userController.login = async (req, res) =>{
+    
+    
+    const userData = {
+        email: req.body.email,
+        password: req.body.password
+    }
+
+     await user.findOne({email: userData.email}, (err, user)=>{
+        // console.log(user.password);
+        if (err) return res.status(400)
+        if (!user) {
+            res.json({
+                status: 'Something is wrong'
+            })
+        }else{
+            const resultPassword = bcrypt.compareSync(userData.password, user.password);
+            if (resultPassword) {
+                res.json({
+                    status: 'OK User was found',
+                    User: userData.email
+                })
+            }else{
+                res.json({
+                    status: 'User not found'
+                })
+            }
+        }
+        
+    });
+    // console.log(UserFound);
+    
+       
+    // if (UserFound) {
+    //     res.json({
+    //         status: 'User Found',
+    //         User: userData
+    //     })
+    // }else{
+    //     res.json({
+    //         status:'User not found'}
+    //         )
+    // }
 }
 // /PUT update user
 userController.editUser = async (req, res) =>{
@@ -86,6 +151,7 @@ userController.editUser = async (req, res) =>{
         name: req.body.name,
         lastname: req.body.lastname,
         motherlastname: req.body.motherlastname,
+        email: req.body.email,
         password: req.body.password,
         confirm_password: req.body.confirm_password,
         role: req.body.role

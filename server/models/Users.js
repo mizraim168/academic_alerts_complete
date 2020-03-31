@@ -8,9 +8,14 @@ const users = new Schema({
     name: {type: String, required: true},
     lastname: {type: String, required: true},
     motherlastname: {type: String, required: true},
+    email: {type: String, unique:true, required: true},
     password: {type: String, required:true},
     role: {type: String, required: true},
-    highdate: {type: Date,  default: Date.now}
+    accesToken: {type:String},
+    expiresIn: {type:String}
+    // highdate: {type: Date,  default: Date.now}
+},{
+    timestamps: true
 });
 
 

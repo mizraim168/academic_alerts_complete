@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { from } from 'rxjs';
 import { NgForm } from '@angular/forms';
+
+declare let M: any;
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems);
+});
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',

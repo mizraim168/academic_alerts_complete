@@ -6,15 +6,15 @@
         <div class="card  blue-grey lighten-5">
             <div class="card-content">
                 <!-- <form #userForm ="ngForm" (ngSubmit)="addUser(userForm)"> -->
-                <form #userForm ="ngForm">
+                <form #loginForm ="ngForm">
                     <div class="row">
                         <div class="input-field">
-                            <input type="text" name="name"  placeholder="Username" >
+                            <input type="text" name="email"  #email="ngModel" [(ngModel)]="loginService.selectedLogin.email"  placeholder="Username / email" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field">
-                            <input type="text" name="lastname"  placeholder="Password" >
+                            <input type="text"   name="password"  #password="ngModel" [(ngModel)]="loginService.selectedLogin.password"  placeholder="Password" >
                         </div>
                     </div>
                     <div class="card-action">
@@ -22,8 +22,9 @@
                             <div class="col">
                                 <div class="input-field">
                                     <p>Go!</p>
-                                    <button class="btn left" [routerLink]="'/main/home'" >Login</button>
+                                    <button class="btn left" (click)="login(loginForm)"  >Login</button>
                                 </div>
+                                <!-- [routerLink]="'/main/home'" -->
                             </div>
                             <div class="col">
                                 <div class="input-field">
