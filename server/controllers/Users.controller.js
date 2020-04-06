@@ -52,7 +52,6 @@ userController.createUser = async (req, res) => {
     const hash = bcrypt.hashSync(pass, saltRounds);
     // end hash password
 
-
     const OneUser = {
         name: req.body.name,
         lastname: req.body.lastname,
@@ -66,41 +65,8 @@ userController.createUser = async (req, res) => {
 
     //Create access token
     const accessToken = jwt.sign({_id: newUser._id}, Secret_Key);
-  
-
-
-    //EMAIL BLOCK CODE START
-    
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.googlemail.com',
-        port: 465,
-        secure: true, // use SSL
-        auth: {
-            user: 'testarv63@gmail.com',
-            pass: 'linkinpark4'
-        }
-    });
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: 'Test <testarv63@gmail.com>', // sender address
-    to: 'mizraimeliab168@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    html: emailMessage // html body
-
-    
-};
-
-
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-});
-
-
-//EMAIL BLOCK CODE END
+    // Function with email settings
+    emailSettings();
     res.json({
         status: "User saved",
         token: accessToken
@@ -202,9 +168,42 @@ function verifyToken  (req, res , next){
     req.userId = payload._id;
 
     console.log(req.userId);
+  
+}
+
+function emailSettings(){
+        //EMAIL BLOCK CODE START
+    
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.googlemail.com',
+            port: 465,
+            secure: true, // use SSL
+            auth: {
+                user: 'testarv63@gmail.com',
+                pass: 'linkinpark4'
+            }
+        });
+    // setup e-mail data with unicode symbols
+    var mailOptions = {
+        from: 'Test <testarv63@gmail.com>', // sender address
+        to: 'mizraimeliab168@gmail.com', // list of receivers
+        subject: 'Hello ✔', // Subject line
+        html: emailMessage // html body
+    
+        
+    };
     
     
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
     
+    
+    //EMAIL BLOCK CODE END
 }
 
  
