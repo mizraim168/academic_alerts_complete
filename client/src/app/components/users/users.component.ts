@@ -4,10 +4,6 @@ import { from } from 'rxjs';
 import { NgForm } from '@angular/forms';
 
 declare let M: any;
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems);
-});
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,19 +11,36 @@ document.addEventListener('DOMContentLoaded', function() {
   providers: [UserService]
 })
 export class UsersComponent implements OnInit {
-
+  // user = {
+  //   name : '',
+  //   lastname: '',
+  //   motherlastname: '',
+  //   email:'',
+  //   password: '',
+  //   role: ''
+  // }
   constructor(public userService: UserService) {
 
    }
 
   ngOnInit(): void {
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems);
+    });
   }
 
   addUser(form: NgForm){
     this.userService.postUser(form.value)
       .subscribe(res => {
         console.log(res);
+        let data = JSON.stringify(res);
+        let dataJson = JSON.parse(data);
+        localStorage.setItem('token', dataJson.token);
       });
   }
+
+ 
 
 }

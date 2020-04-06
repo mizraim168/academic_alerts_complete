@@ -29,13 +29,21 @@ const emailMessage = `
 // /GET all users
 
 userController.getUsers = async (req, res) =>{
+    
    const users =  await user.find();
    res.json(users);
+   
 } 
 // /GET only one user
 userController.getUser = async (req , res) =>{
+    // verifyToken(req, res);
     const getUs = await user.findById(req.params.id);
-    res.json(getUs);
+    res.json(getUs); 
+}
+
+userController.profile = async (req, res) =>{
+    verifyToken(req, res);
+    res.send(req.userId)
 }
 // /POST new user
 userController.createUser = async (req, res) => {
@@ -43,12 +51,7 @@ userController.createUser = async (req, res) => {
     let pass = req.body.password;
     const hash = bcrypt.hashSync(pass, saltRounds);
     // end hash password
-    const expiresIn = 24 * 60 * 60;
-    const id = req.params;
-    //Create token access
-    const accesToken = jwt.sign(id , Secret_Key, {
-        expiresIn: expiresIn
-    });
+
 
     const OneUser = {
         name: req.body.name,
@@ -56,12 +59,17 @@ userController.createUser = async (req, res) => {
         motherlastname: req.body.motherlastname,
         email: req.body.email,
         password: hash,
-        role: req.body.role,
-        accesToken: accesToken,
-        expiresIn: expiresIn
+        role: req.body.role
     }
     const newUser = new user(OneUser)
     await newUser.save();
+
+    //Create access token
+    const accessToken = jwt.sign({_id: newUser._id}, Secret_Key);
+  
+
+
+    //EMAIL BLOCK CODE START
     
     let transporter = nodemailer.createTransport({
         host: 'smtp.googlemail.com',
@@ -90,11 +98,13 @@ transporter.sendMail(mailOptions, function(error, info){
     }
     console.log('Message sent: ' + info.response);
 });
+
+
+//EMAIL BLOCK CODE END
     res.json({
         status: "User saved",
-        token: accesToken
+        token: accessToken
     });
-    return OneUser.password;
 
 }
 
@@ -102,7 +112,7 @@ transporter.sendMail(mailOptions, function(error, info){
 //POST USER NEW (login system)
 userController.login = async (req, res) =>{
     
-    
+    console.log(req.headers.authorization);
     const userData = {
         email: req.body.email,
         password: req.body.password
@@ -110,6 +120,8 @@ userController.login = async (req, res) =>{
 
      await user.findOne({email: userData.email}, (err, user)=>{
         // console.log(user.password);
+        console.log(user);
+        
         if (err) return res.status(400)
         if (!user) {
             res.json({
@@ -118,9 +130,13 @@ userController.login = async (req, res) =>{
         }else{
             const resultPassword = bcrypt.compareSync(userData.password, user.password);
             if (resultPassword) {
+                const accessToken = jwt.sign({_id: user._id}, Secret_Key)
                 res.json({
                     status: 'OK User was found',
-                    User: userData.email
+                    UserEmail: user.email,
+                    UserLastname: user.lastname,
+                    UserRole: user.role,
+                    token: accessToken
                 })
             }else{
                 res.json({
@@ -162,12 +178,36 @@ userController.editUser = async (req, res) =>{
     })
 }
 
-// /DELETE user
+// DELETE user
 userController.deleteUser = async (req, res) =>{
     await user.findByIdAndRemove(req.params.id);
     res.json({
         status: "User Deleted"
     })
 }
+
+
+function verifyToken  (req, res , next){
+
+    if(!req.headers.authorization){
+        return res.status(401).send('Authorization: falied')
+    }
+    const token = req.headers.authorization.split(' ')[1]
+    if (token === 'null'){
+        return res.status(401).send('Authorization: falied')
+    }
+    const payload = jwt.verify(token, Secret_Key)
+    console.log(req.headers.authorization);
+    console.log(payload);
+    req.userId = payload._id;
+
+    console.log(req.userId);
+    
+    
+    
+}
+
  
 module.exports = userController;
+
+

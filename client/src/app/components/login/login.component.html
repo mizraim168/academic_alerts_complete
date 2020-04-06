@@ -9,12 +9,17 @@
                 <form #loginForm ="ngForm">
                     <div class="row">
                         <div class="input-field">
-                            <input type="text" name="email"  #email="ngModel" [(ngModel)]="loginService.selectedLogin.email"  placeholder="Username / email" >
+                            <input type="hidden" name="_id"    >
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field">
-                            <input type="text"   name="password"  #password="ngModel" [(ngModel)]="loginService.selectedLogin.password"  placeholder="Password" >
+                            <input type="text" name="email"  [(ngModel)]="user.email"  placeholder="Username / email" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input type="text"   name="password"  [(ngModel)]="user.password"  placeholder="Password" >
                         </div>
                     </div>
                     <div class="card-action">
@@ -22,7 +27,7 @@
                             <div class="col">
                                 <div class="input-field">
                                     <p>Go!</p>
-                                    <button class="btn left" (click)="login(loginForm)"  >Login</button>
+                                    <button class="btn left" (click)="login()"  >Login</button>
                                 </div>
                                 <!-- [routerLink]="'/main/home'" -->
                             </div>

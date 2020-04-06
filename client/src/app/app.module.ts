@@ -8,7 +8,7 @@ import { MatListModule } from  '@angular/material/list';
 import { MatButtonModule } from  '@angular/material/button';
 import {MatInputModule} from '@angular/material/input'; 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users.component';
@@ -20,7 +20,9 @@ import { MyFollowUpComponent } from './components/my-follow-up/my-follow-up.comp
 import { GeneralFollowComponent } from './components/general-follow/general-follow.component';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import {AuthGuard} from './auth.guard';
+import {TokenInterceptorService} from './services/token-interceptor.service';
 
 const appRoutes: Routes = [
   //Roting loggin with another pages
@@ -28,10 +30,11 @@ const appRoutes: Routes = [
   { path: 'users', component: UsersComponent },
   {path: 'main', component: MainComponent,
   children: [
-    { path: 'home', component: HomeComponent },
-    { path: 'alerts', component: AlertsComponent },
-    { path: 'MyFollow', component: MyFollowUpComponent },
-    { path: 'GeneralFollow', component: GeneralFollowComponent }
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
+    { path: 'MyFollow', component: MyFollowUpComponent, canActivate: [AuthGuard] },
+    { path: 'GeneralFollow', component: GeneralFollowComponent, canActivate: [AuthGuard] },
+    {path: 'account', component: UserSettingsComponent, canActivate: [AuthGuard]}
   ]}
 
 
@@ -47,6 +50,7 @@ const appRoutes: Routes = [
     GeneralFollowComponent,
     MainComponent,
     LoginComponent,
+    UserSettingsComponent,
 
   ],
   imports: [
@@ -67,7 +71,7 @@ const appRoutes: Routes = [
     HttpClientModule
   ],
 
-  providers: [],
+  providers: [AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

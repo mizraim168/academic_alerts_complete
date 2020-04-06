@@ -19,11 +19,15 @@ export class UserService {
 
   getUsers() {
     return this.http.get(this.URL_API);
-    
+  }
+
+  getUser(_id: string){
+    return this.http.get(this.URL_API + `/${_id}`);
   }
   postUser(User: User){
     return this.http.post(this.URL_API, User);
   }
+
 
   putUser(user: User){
     return this.http.put(this.URL_API + `/${user._id}`, user);
