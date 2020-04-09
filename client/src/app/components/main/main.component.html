@@ -37,14 +37,20 @@
 
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
-      <mat-nav-list>
-  
+      
+      <mat-nav-list  *ngIf="arrUser[0].role == 'coodinator'">
+       <!-- *ngIf="arrUser[0].role == 'director' || arrUser[0].role == 'teacher'" -->
         <a mat-list-item [routerLink]="'/main/alerts'"> My academic alerts </a>
         <a mat-list-item [routerLink]="'/main/MyFollow'">  My follow-up </a>
         <a mat-list-item [routerLink]="'/main/GeneralFollow'"> General follow-up </a>
 
   
       </mat-nav-list>
+      <mat-nav-list *ngIf="arrUser[0].role == 'director' || arrUser[0].role == 'teacher'">
+         <a mat-list-item [routerLink]="'/main/alerts'"> My academic alerts </a>
+         <a mat-list-item [routerLink]="'/main/MyFollow'">  My follow-up </a>
+       </mat-nav-list>
+      
     </mat-sidenav>
     <mat-sidenav-content>
       <div style="height: 88vh;">

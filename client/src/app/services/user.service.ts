@@ -11,6 +11,7 @@ export class UserService {
   selectedUser: User;
   users: User[];
   readonly URL_API = 'http://localhost:3000/users';
+  readonly UserProfile = 'http://localhost:3000/users/profile'
   constructor(private http: HttpClient) { 
     this.selectedUser = new User();
   }
@@ -21,8 +22,12 @@ export class UserService {
     return this.http.get(this.URL_API);
   }
 
-  getUser(_id: string){
-    return this.http.get(this.URL_API + `/${_id}`);
+  getUser(){
+    return this.http.get(this.UserProfile);
+  }
+
+  getdataUser(_id :string){
+    return this.http.get(this.URL_API + `/${_id}`)
   }
   postUser(User: User){
     return this.http.post(this.URL_API, User);

@@ -43,7 +43,8 @@ userController.getUser = async (req , res) =>{
 
 userController.profile = async (req, res) =>{
     verifyToken(req, res);
-    res.send(req.userId)
+    // res.send(req.userId)
+    res.json({UserId: req.userId})
 }
 // /POST new user
 userController.createUser = async (req, res) => {
@@ -129,12 +130,14 @@ userController.login = async (req, res) =>{
 // /PUT update user
 userController.editUser = async (req, res) =>{
     const {id} = req.params;
+    let pass = req.body.password;
+    const hash = bcrypt.hashSync(pass, saltRounds);
     const oneUser = {
         name: req.body.name,
         lastname: req.body.lastname,
         motherlastname: req.body.motherlastname,
         email: req.body.email,
-        password: req.body.password,
+        password: hash,
         confirm_password: req.body.confirm_password,
         role: req.body.role
     };
@@ -172,17 +175,17 @@ function verifyToken  (req, res , next){
 }
 
 function emailSettings(){
-        //EMAIL BLOCK CODE START
-    
-        let transporter = nodemailer.createTransport({
-            host: 'smtp.googlemail.com',
-            port: 465,
-            secure: true, // use SSL
-            auth: {
-                user: 'testarv63@gmail.com',
-                pass: 'linkinpark4'
-            }
-        });
+    //EMAIL BLOCK CODE START
+
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.googlemail.com',
+        port: 465,
+        secure: true, // use SSL
+        auth: {
+            user: 'testarv63@gmail.com',
+            pass: 'linkinpark4'
+        }
+    });
     // setup e-mail data with unicode symbols
     var mailOptions = {
         from: 'Test <testarv63@gmail.com>', // sender address
@@ -192,8 +195,6 @@ function emailSettings(){
     
         
     };
-    
-    
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
@@ -201,8 +202,6 @@ function emailSettings(){
         }
         console.log('Message sent: ' + info.response);
     });
-    
-    
     //EMAIL BLOCK CODE END
 }
 

@@ -1,49 +1,55 @@
-<div class="container">
-    <h1 class="title">Welcome to acedemic alerts</h1>
-    <h1 class="title">Login</h1>
-    <div class="row">
-        
-        <div class="card  blue-grey lighten-5">
-            <div class="card-content">
-                <!-- <form #userForm ="ngForm" (ngSubmit)="addUser(userForm)"> -->
-                <form #loginForm ="ngForm">
-                    <div class="row">
-                        <div class="input-field">
-                            <input type="hidden" name="_id"    >
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field">
-                            <input type="text" name="email"  [(ngModel)]="user.email"  placeholder="Username / email" >
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field">
-                            <input type="text"   name="password"  [(ngModel)]="user.password"  placeholder="Password" >
-                        </div>
-                    </div>
-                    <div class="card-action">
+<body class="backgroud">
+    
+    <div class="container">
+        <h1 class="title">Welcome to acedemic alerts</h1>
+        <h1 class="title">Login</h1>
+        <div class="row">
+            
+            <div class="card card-size  blue-grey darken-2">
+                <div class="card-content  white-text">
+                    <!-- <form #userForm ="ngForm" (ngSubmit)="addUser(userForm)"> -->
+                    <form #loginForm ="ngForm">
                         <div class="row">
-                            <div class="col">
-                                <div class="input-field">
-                                    <p>Go!</p>
-                                    <button class="btn left" (click)="login()"  >Login</button>
-                                </div>
-                                <!-- [routerLink]="'/main/home'" -->
-                            </div>
-                            <div class="col">
-                                <div class="input-field">
-                                    <p>No account yet?</p>
-                                    <a class="btn left" [routerLink]="'/users'">Create account</a>
-                                </div>
+                            <div class="input-field">
+                                <input type="hidden" name="_id"    >
                             </div>
                         </div>
-                       
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="text" name="email"  [(ngModel)]="user.email"   >
+                                <label >email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input  type="password"   name="password"  [(ngModel)]="user.password"  >
+                                <label>password</label>
+                            </div>
+                        </div>
+                        <div class="card-action  ">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-field  ">
+                                        <p>Go!</p>
+                                        <button class="btn left btn-circle  indigo" (click)="login()"  >Login</button>
+                                    </div>
+                                    <!-- [routerLink]="'/main/home'" -->
+                                </div>
+                                <div class="col">
+                                    <div class="input-field  ">
+                                        <p>No account yet?</p>
+                                        
+                                        <button class="btn left btn-circle  indigo" [routerLink]="'/users'">Create account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
 
-                    </div>
-                    
-                </form>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>
