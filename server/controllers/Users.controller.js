@@ -1,7 +1,7 @@
 const user = require('../models/Users');
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt');
+let bcrypt = require('bcrypt');
 const Secret_Key = 'secret_key_utags';
 const saltRounds = 10; //for production mode set 12 saltRounds
 
@@ -178,7 +178,7 @@ function emailSettings(){
     //EMAIL BLOCK CODE START
 
     let transporter = nodemailer.createTransport({
-        host: 'smtp.googlemail.com',
+        host: 'smtp.googlemail.com', // smtp.outlook.com
         port: 465,
         secure: true, // use SSL
         auth: {
@@ -187,12 +187,11 @@ function emailSettings(){
         }
     });
     // setup e-mail data with unicode symbols
-    var mailOptions = {
+    let mailOptions = {
         from: 'Test <testarv63@gmail.com>', // sender address
         to: 'mizraimeliab168@gmail.com', // list of receivers
         subject: 'Hello ✔', // Subject line
         html: emailMessage // html body
-    
         
     };
     // send mail with defined transport object
@@ -202,7 +201,7 @@ function emailSettings(){
         }
         console.log('Message sent: ' + info.response);
     });
-    //EMAIL BLOCK CODE END
+    // EMAIL BLOCK CODE END
 }
 
  

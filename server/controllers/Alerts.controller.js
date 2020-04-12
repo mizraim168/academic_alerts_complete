@@ -1,5 +1,5 @@
 const alert = require('../models/Alerts');
-
+const path = require('path');
 const alertController = {};
 
 
@@ -66,5 +66,29 @@ alertController.deleteAlert = async (req, res) =>{
 }
 
 
- 
+//methos with files works!
+alertController.uploadFile = async (req, res) =>{
+    // res.send('si jala');
+  
+    console.log(req.file);
+    console.log('el tamanio');
+    
+    console.log(req.file.size);
+    
+    res.json(
+        {
+            status: "File saved",
+            fileName: req.file.originalname
+        }
+    );
+}
+
+alertController.download = async (req, res ) =>{
+    let file = req.params.file;
+    let file_location = path.join('server/public/uploads', file);
+    console.log(file_location);
+    res.download(file_location, file);
+    
+}
+
 module.exports = alertController;

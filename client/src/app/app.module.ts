@@ -20,6 +20,7 @@ import { MyFollowUpComponent } from './components/my-follow-up/my-follow-up.comp
 import { GeneralFollowComponent } from './components/general-follow/general-follow.component';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,

@@ -6,6 +6,8 @@ const alertController = require('../controllers/Alerts.controller');
     // alerts routing
     router.get('/', alertController.getAlerts);
     router.post('/', alertController.createAlert);
+    router.post('/file', alertController.uploadFile);
+    router.get('/download/:file(*)', alertController.download);
     router.get('/:id', alertController.getAlert);
     router.put('/:id', alertController.editAlert);
     router.delete('/:id', alertController.deleteAlert);

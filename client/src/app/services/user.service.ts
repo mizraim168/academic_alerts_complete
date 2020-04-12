@@ -18,6 +18,7 @@ export class UserService {
 
   // GET Data from the server
 
+
   getUsers() {
     return this.http.get(this.URL_API);
   }

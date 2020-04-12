@@ -18,8 +18,30 @@
                     
                     <div class="row">
                         <div class="col"><a class="waves-effect waves-light btn"><i class="material-icons right">send</i>Send</a></div>
-                        <div class="col"><a class="waves-effect waves-light btn"><i class="material-icons right">attach_file</i>Add file</a></div>
+                        <!-- <div class="col"><a class="waves-effect waves-light btn"><i class="material-icons right">attach_file</i>Add file</a></div> -->
                         
+                        <div>
+                          <form [formGroup] = "fileService.uploadForm" (ngSubmit)="onSubmit()">      
+                            <div class = "file-field input-field">
+                              <div class = "btn">
+                                <span>Add file</span>
+                                
+                                <input type="file" name="profile" (change)="onFileSelect($event)" />
+                                <i class="material-icons right">attach_file</i>
+                              </div>
+                              <div class = "file-path-wrapper">
+                                <input class = "file-path validate" type = "text" placeholder = "Upload file"  />
+                              </div>
+                               
+                            </div>
+                            <button class="btn" type="submit"><i class="material-icons right">file_upload</i>Upload</button>
+                            <!-- <div *ngFor="let item of listFiles"> -->
+                              <!-- <button class="btn" type="submit"><i class="material-icons right">file_upload</i>Upload</button> -->
+                              <!-- <a>{{item}}</a> -->
+                            <!-- </div> -->
+                          </form>
+                        </div>
+
                     </div>
                 </div>
                
