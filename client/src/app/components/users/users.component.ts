@@ -25,10 +25,10 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     
-    document.addEventListener('DOMContentLoaded', function() {
+  
       var elems = document.querySelectorAll('select');
       var instances = M.FormSelect.init(elems);
-    });
+    
   }
 
   addUser(form: NgForm){

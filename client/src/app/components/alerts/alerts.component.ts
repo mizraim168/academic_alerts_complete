@@ -8,6 +8,8 @@ import html2canvas from 'html2canvas';
 declare let M: any;
 // declare let jspdf: any; 
 
+
+
 @Component({
   selector: 'app-alerts',
   templateUrl: './alerts.component.html',
@@ -15,15 +17,37 @@ declare let M: any;
   providers: [AlertService]
 })
 export class AlertsComponent implements OnInit {
-
-  
-
+  valueCategory = '';
+  val:string
+  arr = {
+    value: this.val
+  }
   constructor(public alertService: AlertService) { }
 
-  ngOnInit(): void {
-    this.getAlerts();
 
+  ngOnInit(){
+      // this.valueCategory = "academic";
+      
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems);
+    
+      this.getAlerts();
+    
+      
   }
+
+
+  paver(){
+    console.log(this.arr);
+  }
+
+  optionChanged(event){
+    console.log(event.target.value);
+    this.valueCategory = event.target.value;
+    
+    
+  }
+ 
 
   createReport()  
   {  
@@ -54,6 +78,7 @@ export class AlertsComponent implements OnInit {
         this.resetForm(form);
         M.toast({html: 'Updated Successfuly'})
         this.getAlerts();
+        
       });
     }else{
       this.alertService.postAlert(form.value)

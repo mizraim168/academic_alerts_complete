@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user'; 
+
+declare let M: any;
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -15,6 +17,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser()
+
   }
 
   getUser(){

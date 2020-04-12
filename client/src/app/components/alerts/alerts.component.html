@@ -46,47 +46,178 @@
 
 
 <div class="container">
-    <h1 class="title">Create a new alert</h1><br>
+    <h1 class="title">Crear una nueva alerta</h1><br>
     <div class="row">
-        <form #alertForm ="ngForm" class="col s12" >
+        <form #alertForm ="ngForm" class="col" >
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "alertService.selectedAlert._id">
         <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col ">
                 <input type="number" name="matricula" #matricula="ngModel" [(ngModel)]="alertService.selectedAlert.matricula"  >
-            <label>Matricula</label>
+            <label>Matrícula</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col ">
                 <input type="text" name="student_name" #student_name="ngModel" [(ngModel)]="alertService.selectedAlert.student_name" >
-            <label >Student name</label>
+            <label >Nombre del estudiante</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input type="text" name="educational_program" #educational_program="ngModel" [(ngModel)]="alertService.selectedAlert.educational_program"  >
-            <label >Educational program</label>
+                
+                <select name="educational_program" #educational_program="ngModel" [(ngModel)]="alertService.selectedAlert.educational_program" >
+                    <option value="" disabled selected>Selecciona el programa educativo</option>
+                    <optgroup label="Contador Público">
+                        <option value="CP">CP</option>
+                    </optgroup>
+                    <optgroup label="TSU en Tecnologías de la Información y Comunicación">
+                        <option value="TICASI">TICASI</option>
+                    </optgroup> 
+                    <optgroup label="TSU en Tecnologías de la Información">
+                        <option value="TIADSM">TIADSM</option>
+                        <option value="TIAIRD">TIAIRD</option>
+                    </optgroup>
+                    <optgroup label="TSU en Procesos Industriales">
+                        <option value="PIAM">PIAM</option>
+                    </optgroup> 
+                    <optgroup label="TSU en Paramédico">
+                        <option value="PM">PM</option>
+                    </optgroup>
+                    <optgroup label="TSU en Mecatrónica">
+                        <option value="MTASMF">MTASMF</option>
+                        <option value="MTAA">MTAA</option>
+                    </optgroup>    
+                    <optgroup label="TSU en Mantenimiento">
+                        <option value="MAI">MAI</option>
+                    </optgroup>
+                    <optgroup label="TSU en Logística">
+                        <option value="LACS">LACS</option>
+                    </optgroup>
+                    <optgroup label="TSU en Energías Renovables">
+                        <option value="ERAES">ERAES</option>
+                    </optgroup>
+                    <optgroup label="TSU en Desarrollo de Negocios">
+                        <option value="DNAM">DNAM</option>
+                    </optgroup>
+                    <optgroup label="TSU en Contaduría">
+                        <option value="CT">CT</option>
+                    </optgroup>
+                    <optgroup label="TSU en Administración">
+                        <option value="AAFEP">AAFEP</option>
+                        <option value="AACH">AACH</option>
+                    </optgroup>
+                    <optgroup label="Licenciatura en Protección Civil y Emergencias">
+                        <option value="LPCE">LPCE</option>
+                    </optgroup>
+                    <optgroup label="Licenciatura en Innovación de Negocios y Mercadotecnia">
+                        <option value="LINM">LINM</option>
+                    </optgroup>
+                    <optgroup label="Licenciatura en Gestión del Capital Humano">
+                        <option value="LGCH">LGCH</option>
+                    </optgroup>
+                    <optgroup label="Licenciatura en Gestión de Negocios y Proyectos">
+                        <option value="LGNP">LGNP</option>
+                    </optgroup>
+                    <optgroup label="Licenciatura en Diseño y Gestión de Redes Logísticas">
+                        <option value="LDGRL">LDGRL</option>
+                    </optgroup>
+                    <optgroup label="Ingeniería en Desarrollo Empresarial y Dirección de Proyectos">
+                        <option value="IDEDP">IDEDP</option>
+                    </optgroup>
+                    <optgroup label="Ing. en Tecnologías de la Información">
+                        <option value="ITI">ITI</option>
+                    </optgroup>
+                    <optgroup label="Ing. en Sistemas Productivos">
+                        <option value="ISP">ISP</option>
+                    </optgroup>
+                    <optgroup label="Ing. en Mecatrónica">
+                        <option value="IMT">IMT</option>
+                    </optgroup>
+                    <optgroup label="Ing. en Mantenimiento Industrial">
+                        <option value="IMI">IMI</option>
+                    </optgroup>
+                    <optgroup label="Ing. en Logística Internacional">
+                        <option value="ILI">ILI</option>
+                    </optgroup>
+                    <optgroup label="Ing. en Desarrollo e Innovación Empresarial">
+                        <option value="IDIE">IDIE</option>
+                    </optgroup>
+                    <optgroup label="Contador Público">
+                        <option value="CP">CP</option>
+                    </optgroup>
+                </select>
+            <label >Programa educativo</label>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input type="text" name="incidence" #incidence="ngModel" [(ngModel)]="alertService.selectedAlert.incidence" >
-            <label >Incidence</label>
+        <!-- <div class="row">
+            
+            <div class="input-field ">
+ 
+                <select #qwcSelect (change)="optionChanged($event)" name="category_alert" #category_alert="ngModel" [(ngModel)]="alertService.selectedAlert.category_alert" >
+                    <option  value="" disabled selected>Choose your category alert </option>
+                    <option  value="academic">Academic</option>
+                    <option  value="psychosocial_and_health">Psychosocial and Health</option>
+                    <option  value="economic">Economic</option>
+                    <option  value="institutional">Institutional</option>
+                </select>
+                <label >select your category alert</label>
             </div>
+        </div> -->
+    
+        <div class="row" >
+            <div class="input-field col s12 ">
+                <select  name="incidence" #incidence="ngModel" [(ngModel)]="alertService.selectedAlert.incidence"  >
+                    <option value="" disabled selected>Selecciona la incidencia</option>
+                    <optgroup label="Académico">
+                        <option value="Reprueba evaluaciones formativas y sumativas">Reprueba evaluaciones formativas y sumativas</option>
+                        <option value="Inasistencias">Inasistencias</option>
+                        <option value="Carece de hábitos de estudio">Carece de hábitos de estudio</option>
+                        <option value="Dificultad para el aprendizaje">Dificultad para el aprendizaje</option>
+                        <option value="Actitud apática, desinteresada o no participa">Actitud apática, desinteresada o no participa</option>
+                        <option value="No entrega tareas, trabajos, proyectos">No entrega tareas, trabajos, proyectos</option>
+                        <option value="Copia en tareas, trabjos, proyectos">Copia en tareas, trabajos, proyectos</option>
+                      </optgroup>
+                      <optgroup label="Psicosocial o Salud">
+                        <option value="Depresión, adicciones, agresión, trastornos del sueño y estrés">Depresión, adicciones, agresión, trastornos del sueño y estrés </option>
+                        <option value="Aislamiento en actividades encomendadas">Aislamiento en actividades encomendadas</option>
+                        <option value="Embarazo, cuidado de hijos, casarse o divorciarse">Embarazo, cuidado de hijos, casarse o divorciarse</option>
+                        <option value="Participa en actividades que reducen su tiempo de estudio">Participa en actividades que reducen su tiempo de estudio</option>
+                        <option value="Problemas de salud crónicos o imprevistos">Problemas de salud crónicos o imprevistos</option>
+                      </optgroup>
+                      <optgroup label="Económico"> 
+                        <option value="Presenta insuficiencia económica">Presenta insuficiencia económica</option>
+                        <option value="Despido, ascenso o cambio de trabajo">Despido, ascenso o cambio de trabajo</option>
+                        <option value="Cambio de horario de trabajo">Cambio de horario de trabajo</option>
+                        <option value="Problemas legales">Problemas legales</option>
+                      </optgroup>
+                      <optgroup label="Institucional">
+                        <option value="No está registrado en el sistema SITO">No está registrado en el sistema SITO</option>
+                        <option value="Falta de documentación reglamentaria para inscripción">Falta de documentación reglamentaria para inscripción</option>
+                        <option value="Sanciones reglamentarias de la legislación universitaria por conductas de indiciplina leves o graves">Sanciones reglamentarias de la legislación universitaria por conductas de indiciplina leves o graves</option>
+                        <option value="Revalidación de la asignatura">Revalidación de la asignatura</option>
+                      </optgroup>
+                </select>
+            <label >Incidencia</label>
+            </div>
+        
         </div>
+
+    
+            
+        
 
         <div class="row">
             <div class="input-field col s12">
                 <input type="text" name="tracing" #tracing="ngModel" [(ngModel)]="alertService.selectedAlert.tracing" >
-            <label >Tracing</label>
+            <label >Primer seguimiento</label>
             </div>
 
 
         </div>
         <div class="row">
-            <div class="col s12">
+            <div class="col ">
 
             <div class="input-field inline">
                
-                <button class="btn right" (click)="addAlert(alertForm)"> <i class="material-icons right">add</i>Save alert</button>
+                <button class="btn right" (click)="addAlert(alertForm)"> <i class="material-icons right">add</i>Guardar alerta</button>
 
             </div>
             </div>
@@ -96,19 +227,19 @@
 
     <div *ngIf="alertService.alerts.length>0">
     
-        <h1 class="title">My alerts</h1>
+        <h1 class="title">Mis alertas</h1>
 
-        <a class="waves-effect waves-light btn" (click)="createReport()" ><i class="material-icons right">cloud_download</i>Download report</a>
+        <a class="waves-effect waves-light btn" (click)="createReport()" ><i class="material-icons right">cloud_download</i>Descargar Reporte</a>
 
         <div class="row"   >
             <table class="striped responsive-table" id="report" >
                 <thead >
-                    <th>matricula</th>
-                    <th>Student name</th>
-                    <th>Educational program</th>
-                    <th>Incidence</th>
-                    <th>Tracing</th>
-                    <th>Actions</th>
+                    <th>Matrícula</th>
+                    <th>Nombre de estudiante</th>
+                    <th>Programa educativo</th>
+                    <th>Incidencia</th>
+                    <th>Primer seguimiento</th>
+                    <th>Acciones</th>
                     
                 </thead>
                 <tbody >
