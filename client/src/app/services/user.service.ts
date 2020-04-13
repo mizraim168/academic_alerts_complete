@@ -12,6 +12,7 @@ export class UserService {
   users: User[];
   readonly URL_API = 'http://localhost:3000/users';
   readonly UserProfile = 'http://localhost:3000/users/profile'
+  readonly alerts = 'http://localhost:3000/users/data'
   constructor(private http: HttpClient) { 
     this.selectedUser = new User();
   }
@@ -29,6 +30,10 @@ export class UserService {
 
   getdataUser(_id :string){
     return this.http.get(this.URL_API + `/${_id}`)
+  }
+
+  getAlertsData(_id :string){
+    return this.http.get(this.alerts+ `/${_id}`)
   }
   postUser(User: User){
     return this.http.post(this.URL_API, User);

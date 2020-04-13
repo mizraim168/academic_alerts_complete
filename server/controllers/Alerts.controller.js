@@ -25,6 +25,7 @@ alertController.getAlert = async (req , res) =>{
     const getUsAlerts = await alert.findById(req.params.id);
     res.json(getUsAlerts);
 }
+
 // /POST new alert
 alertController.createAlert = async (req, res) => {
     const newAlert = new alert({
@@ -32,8 +33,9 @@ alertController.createAlert = async (req, res) => {
         student_name: req.body.student_name,
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
-        tracing: req.body.tracing
-        
+        tracing: req.body.tracing,
+        id_user: req.body.id_user,
+        comments: req.body.comments
         // date: fulldate
     });
     await newAlert.save();
@@ -49,7 +51,9 @@ alertController.editAlert = async (req, res) =>{
         student_name: req.body.student_name,
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
-        tracing:  req.body.tracing
+        tracing:  req.body.tracing,
+        id_user: req.body.id_user,
+        comments: req.body.comments
     };
     await alert.findByIdAndUpdate(id, {$set: oneAlert}, {new:true} );
     res.json({

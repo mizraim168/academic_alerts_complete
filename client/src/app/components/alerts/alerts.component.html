@@ -50,9 +50,11 @@
     <div class="row">
         <form #alertForm ="ngForm" class="col" >
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "alertService.selectedAlert._id">
+            <input type="hidden"  name="id_user" #id_user="ngModel" [(ngModel)]= "userId">
         <div class="row">
             <div class="input-field col ">
                 <input type="number" name="matricula" #matricula="ngModel" [(ngModel)]="alertService.selectedAlert.matricula"  >
+
             <label>Matrícula</label>
             </div>
             <div class="input-field col ">
@@ -250,11 +252,11 @@
                         <td>{{alert.incidence}}</td>
                         <td>{{alert.tracing}}</td>
                         <td>
-                            <a (click)="editAlert(alert)" >
+                            <a class="select btn indigo" (click)="editAlert(alert)" >
                                 <i class="material-icons">edit</i>
                             </a>
-                            <a (click)="deleteAlert(alert._id)" >
-                                <i class="material-icons">delete</i>
+                            <a class="select btn red" (click)="deleteAlert(alert._id)" >
+                                <i class="material-icons ">delete</i>
                             </a>
                         </td>
                     

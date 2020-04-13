@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 const { Schema } = mongoose;
+
+autoIncrement.initialize(mongoose);
 
 const users = new Schema({
     // email: {type: String, required: true},
@@ -11,8 +14,19 @@ const users = new Schema({
     email: {type: String, unique:true, required: true},
     password: {type: String, required:true},
     role: {type: String, required: true}
+    // alerts: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Alerts'
+    // }]
 },{
     timestamps: true
+});
+
+users.plugin(autoIncrement.plugin, {
+    model: '_id',
+    field: '_id',
+    startAt: 1,
+    incrementBy: 1
 });
 
 

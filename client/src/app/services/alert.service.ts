@@ -23,6 +23,7 @@ export class AlertService {
     return this.http.post(this.URL_API, Alert);
   }
 
+
   putAlert(alert: Alert){
     return this.http.put(this.URL_API + `/${alert._id}`, alert);
   }

@@ -1,46 +1,48 @@
-<p>user-settings works!</p>
+<!-- <p>user-settings works!</p> -->
 
 <div class="container">
+  <h1 class="center">Mi Cuenta</h1>
     <div class="row">
-        <div class="col s7">
+        <!-- <div class="col"> -->
           <div class="card blue-grey darken-1">
-            <div class="card-content white-text" *ngFor="let item of arrUser">
+            <div class="card-content white-text center" *ngFor="let item of arrUser">
               
-              <span class="card-title">Username: {{item.name}}</span>
-              <span>Email: {{item.email}} </span>
+              <span class="card-title">Nombre: {{item.name}}</span>
+              <span>Correo electrónico: {{item.email}} </span>
               <br><br>
-              <span>Lastname: {{item.lastname}}</span>
+              <span>Apellido: {{item.lastname}}</span>
               <br><br>
-              <span>Role: {{item.role}}</span>
+              <span>Puesto: {{item.role}}</span>
               
             
               <div class="card-action"  >
-                <a (click)="editUser(item)">Edit my info</a>
-                <a (click)="deleteUser(item._id)">Delete my account</a>
+                <!-- <a (click)="editUser(item)">Edit my info</a> -->
+                <!-- <a (click)="deleteUser(item._id)">Delete my account</a> -->
+                <a (click)="deleteUser(item._id)" class="waves-effect waves-light btn red"><i class="material-icons left">delete_forever</i>Eliminar mi cuenta</a>
               </div>
           </div>
           </div>
-        </div>
-        <div class="col">
+        <!-- </div> -->
+        <!-- <div class="col">
           <form #dataFrom ="ngForm">
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "userService.selectedUser._id">
         
             <div class="row">
               <div class="input-field ">
                 <input  type="text"   name="username" #username="ngModel" [(ngModel)]="userService.selectedUser.name" placeholder="username"   >
-                <!-- <label>username</label> -->
+                
               </div>
             </div>
             <div class="row">
               <div class="input-field ">
                 <input  type="text"   name="lastname" #lastname="ngModel"  [(ngModel)]="userService.selectedUser.lastname" placeholder="lastname">
-                <!-- <label>lastname</label> -->
+               
               </div>
             </div>
             <div class="row">
               <div class="input-field ">
                 <input  type="password"   name="password"  #password="ngModel"  [(ngModel)]="userService.selectedUser.password" placeholder="password" >
-                <!-- <label>new password</label> -->
+              
               </div>
             </div>
 
@@ -55,7 +57,7 @@
               </div>
           </div>
         </form>
-        </div>
+        </div> -->
     </div>
 </div>
 

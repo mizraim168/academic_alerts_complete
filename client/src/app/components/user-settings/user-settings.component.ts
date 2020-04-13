@@ -25,6 +25,15 @@ export class UserSettingsComponent implements OnInit {
       this.userId = res['UserId'];
       this.userService.getdataUser(this.userId)
       .subscribe(res =>{
+        console.log('si se trajo las alertas');
+        this.userService.getAlertsData(res['_id'])
+        .subscribe(res =>{
+          console.log('Aqui empiezan las alertas');
+          console.log(res);
+          console.log('aqui termian las alertas');
+          
+        })
+        
         console.log('los values del user: ');
         
         console.log(res);

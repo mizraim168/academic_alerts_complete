@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef ,ViewChild } from '@angular/core';
 import {AlertService} from '../../services/alert.service';
 import {Alert} from '../../models/alert';
+import {UserService} from '../../services/user.service';
+import {User} from '../../models/user'; 
 import { NgForm } from '@angular/forms';
 import * as jspdf from 'jspdf';  
 import html2canvas from 'html2canvas';  
@@ -14,7 +16,7 @@ declare let M: any;
   selector: 'app-alerts',
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css'],
-  providers: [AlertService]
+  providers: [AlertService, UserService]
 })
 export class AlertsComponent implements OnInit {
   valueCategory = '';
@@ -22,7 +24,9 @@ export class AlertsComponent implements OnInit {
   arr = {
     value: this.val
   }
-  constructor(public alertService: AlertService) { }
+  userId:string;
+  id_user:string;
+  constructor(public alertService: AlertService, public userService: UserService) { }
 
 
   ngOnInit(){
@@ -32,8 +36,33 @@ export class AlertsComponent implements OnInit {
       var instances = M.FormSelect.init(elems);
     
       this.getAlerts();
-    
+      this.getUser();
+      this.userId = this.alertService.selectedAlert.id_user;
       
+  }
+  getUser(){
+    this.userService.getUser()
+    .subscribe(res =>{
+      console.log(res);
+      this.userId = res['UserId'];
+      this.userService.getdataUser(this.userId)
+      .subscribe(res =>{
+        console.log('si se trajo las alertas');
+        this.userService.getAlertsData(res['_id'])
+        .subscribe(res =>{
+          console.log('Aqui empiezan las alertas');
+          console.log(res);
+          console.log('aqui termian las alertas');
+          
+        })
+        
+        console.log('los values del user: ');
+        
+        console.log(res);
+        
+        
+      });
+    });
   }
 
 
@@ -68,6 +97,7 @@ export class AlertsComponent implements OnInit {
 
   }  
 
+
  
 
   addAlert(form: NgForm){
@@ -97,7 +127,8 @@ export class AlertsComponent implements OnInit {
     .subscribe(res =>{
       this.alertService.alerts = res as Alert[];
       console.log(res);
-   
+     
+      
     })
   }
   editAlert(alert : Alert){

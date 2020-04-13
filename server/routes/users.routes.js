@@ -6,6 +6,7 @@ const alertController = require('../controllers/Alerts.controller');
     // Login routing
     router.get('/', userController.getUsers);
     router.get('/profile', userController.profile);
+    router.get('/data/:id', userController.completeData);
     router.post('/', userController.createUser);
     router.get('/:id', userController.getUser);
     router.put('/:id', userController.editUser);

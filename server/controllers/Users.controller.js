@@ -1,4 +1,5 @@
 const user = require('../models/Users');
+const alert = require('../models/Alerts');
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt');
@@ -31,15 +32,47 @@ const emailMessage = `
 userController.getUsers = async (req, res) =>{
     
    const users =  await user.find();
-   res.json(users);
+   res.json(users); 
+   const collName = alert.collection.collectionName;
+    console.log(collName);
    
 } 
+
+userController.completeData = async (req, res) =>{
+    const collName = alert.collection.collectionName;
+    console.log(collName);
+    const id = user.findById(req.params._id);
+  const data = await user.aggregate([
+    // { $match: { _id: 1 } },
+    {
+        $lookup: {
+          from: collName,
+          localField: '_id',
+          foreignField: 'id_user',
+          as:'Alerts'
+        }
+    }], (err, userData) =>{
+        const data = userData[0].Alerts[0];
+        console.log(userData[0].Alerts[0]);
+        console.log('esto tiene data');
+        console.log(data);
+        // const userDa = new dat(userData[0])
+        //  userDa.save();
+        res.json(userData)
+    })
+
+
+    // res.json(data)
+}
 // /GET only one user
 userController.getUser = async (req , res) =>{
     // verifyToken(req, res);
     const getUs = await user.findById(req.params.id);
     res.json(getUs); 
+  
+
 }
+
 
 userController.profile = async (req, res) =>{
     verifyToken(req, res);
@@ -59,7 +92,8 @@ userController.createUser = async (req, res) => {
         motherlastname: req.body.motherlastname,
         email: req.body.email,
         password: hash,
-        role: req.body.role
+        role: req.body.role,
+        alerts: req.body.alerts
     }
     const newUser = new user(OneUser)
     await newUser.save();
