@@ -41,6 +41,7 @@ app.use(multerConfig);
 //Routes
 app.use('/users',require('./routes/users.routes'));
 app.use('/alerts',require('./routes/alert.routes'));
+app.use('/comments',require('./routes/comments.routes'));
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))

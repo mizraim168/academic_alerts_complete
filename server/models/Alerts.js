@@ -8,11 +8,11 @@ const alerts = new Schema({
     incidence: { type: String, required: false },
     tracing: { type: String, required: false },
     id_user : {type: Number },
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-    }],
+    // comment: [{type: Schema.ObjectId, ref: "Comment"}],
     date: {type: Date, default: Date.now}
 });
+
+
+
 
 module.exports = mongoose.model('Alerts', alerts);

@@ -34,8 +34,8 @@ alertController.createAlert = async (req, res) => {
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
         tracing: req.body.tracing,
-        id_user: req.body.id_user,
-        comments: req.body.comments
+        id_user: req.body.id_user
+        // comment: req.body.comment
         // date: fulldate
     });
     await newAlert.save();
@@ -52,8 +52,8 @@ alertController.editAlert = async (req, res) =>{
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
         tracing:  req.body.tracing,
-        id_user: req.body.id_user,
-        comments: req.body.comments
+        id_user: req.body.id_user
+        // comment: req.body.comment
     };
     await alert.findByIdAndUpdate(id, {$set: oneAlert}, {new:true} );
     res.json({
