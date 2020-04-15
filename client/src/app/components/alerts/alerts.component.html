@@ -53,8 +53,11 @@
             <input type="hidden"  name="id_user" #id_user="ngModel" [(ngModel)]= "userId">
         <div class="row">
             <div class="input-field col ">
-                <input type="number" name="matricula" #matricula="ngModel" [(ngModel)]="alertService.selectedAlert.matricula"  >
-
+                <input  type="text"  maxlength="6" name="matricula" #matricula="ngModel" [(ngModel)]="alertService.selectedAlert.matricula"  >
+                <!-- <p>{{matricula.value.length}}</p> -->
+                <div *ngIf="matricula.value.length <= 6">
+                    <label>*La matrícula solo acepta 6 digitos.</label>
+                </div>
             <label>Matrícula</label>
             </div>
             <div class="input-field col ">
@@ -211,6 +214,10 @@
                 <input type="text" name="tracing" #tracing="ngModel" [(ngModel)]="alertService.selectedAlert.tracing" >
             <label >Primer seguimiento</label>
             </div>
+            <div>
+                <label>*Es el primer comentario sobre la situación.</label>
+            </div>
+            
 
 
         </div>

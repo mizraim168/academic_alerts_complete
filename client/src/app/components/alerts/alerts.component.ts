@@ -97,7 +97,11 @@ export class AlertsComponent implements OnInit {
 
   }  
 
-
+  counter(elem){
+    if (elem.value.length > 6) {
+      elem.value = elem.value.slice(0,6); 
+    }
+  }
  
 
   addAlert(form: NgForm){
@@ -106,7 +110,7 @@ export class AlertsComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.resetForm(form);
-        M.toast({html: 'Updated Successfuly'})
+        M.toast({html: 'Alerta actualizada correctamente'})
         this.getAlerts();
         
       });
@@ -115,7 +119,7 @@ export class AlertsComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.resetForm(form);
-        M.toast({html: 'Saved Successfuly'})
+        M.toast({html: 'Alerta guardada correctamente'})
         this.getAlerts();
       });
     }
@@ -136,12 +140,12 @@ export class AlertsComponent implements OnInit {
     // this.userService.putUser()
   }
   deleteAlert(_id:string){
-    if (confirm('Are you sure you want to delete it?')) {
+    if (confirm('¿Estás seguro de que quieres eliminar la alerta?')) {
       this.alertService.deleteAlert(_id)
       .subscribe(res => {
         console.log(res);
         this.getAlerts();
-        M.toast({html: 'Deleted successfuly'})
+        M.toast({html: 'Alerta eliminada correctamente'})
       });
      
 

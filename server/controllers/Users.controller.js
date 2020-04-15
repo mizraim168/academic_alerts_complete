@@ -135,6 +135,7 @@ userController.login = async (req, res) =>{
                 res.json({
                     status: 'OK User was found',
                     UserEmail: user.email,
+                    UserName: user.name,
                     UserLastname: user.lastname,
                     UserRole: user.role,
                     token: accessToken

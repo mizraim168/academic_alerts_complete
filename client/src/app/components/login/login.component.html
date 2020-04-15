@@ -1,14 +1,19 @@
 <body class="backgroud">
     
     <div class="container">
-        <h1 class="title">Welcome to acedemic alerts</h1>
-        <h1 class="title">Login</h1>
+        <h1 class="title">Bienvenido a Alertas académicas</h1>
+        <h1 class="title">Iniciar sesión</h1>
         <div class="row">
             
             <div class="card card-size  blue-grey darken-2">
                 <div class="card-content  white-text">
                     <!-- <form #userForm ="ngForm" (ngSubmit)="addUser(userForm)"> -->
-                    <form #loginForm ="ngForm">
+                        <div *ngIf="(primEmail.invalid && primEmail.touched) || primEmail.dirty">
+                            <small *ngIf="primEmail.errors?.required" class="text-danger">El correo electrónico es olbigatorio</small>
+                            <!--question mark(?) is a safe navigation operator-->
+                            <small *ngIf="primEmail.errors?.pattern" class="text-danger">Por favor introduce una dirección de correo</small>
+                          </div>
+                    <form  [formGroup]="user">
                         <div class="row">
                             <div class="input-field">
                                 <input type="hidden" name="_id"    >
@@ -16,30 +21,30 @@
                         </div>
                         <div class="row">
                             <div class="input-field ">
-                                <input type="text" name="email"  [(ngModel)]="user.email"   >
-                                <label >email</label>
+                                <input [class.is-invalid] = "user.get('email').invalid && user.get('email').touched" type="text" name="email"   formControlName="email"  >
+                                <label >Correo electrónico</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field ">
-                                <input  type="password"   name="password"  [(ngModel)]="user.password"  >
-                                <label>password</label>
+                                <input  type="password"   name="password"   formControlName="password"  >
+                                <label>Contraseña</label>
                             </div>
                         </div>
                         <div class="card-action  ">
                             <div class="row">
                                 <div class="col">
                                     <div class="input-field  ">
-                                        <p>Go!</p>
-                                        <button class="btn left btn-circle  indigo" (click)="login()"  >Login</button>
+                                        <p>Vamos!</p>
+                                        <button class="btn left btn-circle  indigo" (click)="login()"  >Iniciar</button>
                                     </div>
                                     <!-- [routerLink]="'/main/home'" -->
                                 </div>
                                 <div class="col">
                                     <div class="input-field  ">
-                                        <p>No account yet?</p>
+                                        <p>No tiene una cuenta? Puedes crear una</p>
                                         
-                                        <button class="btn left btn-circle  indigo" [routerLink]="'/users'">Create account</button>
+                                        <button class="btn left btn-circle  indigo" [routerLink]="'/users'">Crear cuenta</button>
                                     </div>
                                 </div>
                             </div>
