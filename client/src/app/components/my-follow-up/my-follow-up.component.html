@@ -17,11 +17,11 @@
         <button >BUSCAR</button>
       </div>
     </div>
-    <div class="row" *ngFor="let item of listAlerts[0][0].Alerts">
+    <div class="row" *ngFor="let x of listAlerts">
         <div class="col s12">
           <div class="card blue-grey darken-1" >
             <div class="card-content white-text">
-              <span class="card-title">CARD WITH NAME {{item.student_name}}</span>
+              <span class="card-title">CARD WITH NAME {{x.student_name}}</span>
               <p>Aqui va la incidencia</p>
             </div>
             <div class="card-action">

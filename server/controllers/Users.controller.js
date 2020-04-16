@@ -33,33 +33,58 @@ userController.getUsers = async (req, res) =>{
     
    const users =  await user.find();
    res.json(users); 
-   const collName = alert.collection.collectionName;
-    console.log(collName);
+
    
 } 
 
 userController.completeData = async (req, res) =>{
+        // tomar el id del usuario actual
+        // verifyToken(req, res);
+        // const el_id = req.userId;
+        // console.log('el id chido');
+        // console.log( el_id);
+        // const id_final = el_id.toString();
+        // console.log('el id final es:');
+        // console.log(id_final);
+    
+    // res.json({UserId: req.userId})
     const collName = alert.collection.collectionName;
     console.log(collName);
-    const id = user.findById(req.params._id);
-  const data = await user.aggregate([
-    // { $match: { _id: 1 } },
+
+
+    // const getUs = await user.findById(req.params.id)
+    // res.json(getUs._id); 
+    // const el_id_chido = getUs._id;
+    const data = await user.aggregate([
+    // { $match: { _id: id } },
     {
         $lookup: {
           from: collName,
           localField: '_id',
           foreignField: 'id_user',
-          as:'Alerts'
+          as: 'Alerts'
         }
     }], (err, userData) =>{
-        const data = userData[0].Alerts[0];
+    
+        // console.log('el id del user');
+        
+        // console.log(el_id_chido);
+        
+
+        console.log(Object.keys(userData));
+        
+        const data = userData[0].Alerts[0]; //pasar el id
         console.log(userData[0].Alerts[0]);
         console.log('esto tiene data');
         console.log(data);
         // const userDa = new dat(userData[0])
         //  userDa.save();
-        res.json(userData)
+        res.json(userData);
     })
+//     // console.log('la query es: *************');
+//     // console.log(query);
+    
+    
 
 
     // res.json(data)
@@ -67,7 +92,7 @@ userController.completeData = async (req, res) =>{
 // /GET only one user
 userController.getUser = async (req , res) =>{
     // verifyToken(req, res);
-    const getUs = await user.findById(req.params.id);
+    const getUs = await user.findById(req.params.id)
     res.json(getUs); 
   
 
