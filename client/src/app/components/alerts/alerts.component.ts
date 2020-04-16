@@ -21,6 +21,7 @@ declare let M: any;
 export class AlertsComponent implements OnInit {
   valueCategory = '';
   val:string
+  listAlerts: Array<any> = [];
   arr = {
     value: this.val
   }
@@ -40,28 +41,69 @@ export class AlertsComponent implements OnInit {
       this.userId = this.alertService.selectedAlert.id_user;
       
   }
+  // getUser(){
+  //   this.userService.getUser()
+  //   .subscribe(res =>{
+  //     console.log(res);
+  //     this.userId = res['UserId'];
+  //     this.userService.getdataUser(this.userId)
+  //     .subscribe(res =>{
+  //       console.log('si se trajo las alertas');
+  //       this.userService.getAlertsData(res['_id'])
+  //       .subscribe(res =>{
+  //         console.log('Aqui empiezan las alertas');
+  //         console.log(res);
+  //         console.log('aqui termian las alertas');
+          
+  //       })
+        
+  //       console.log('los values del user: ');
+        
+  //       console.log(res);
+        
+        
+  //     });
+  //   });
+  // }
+
   getUser(){
     this.userService.getUser()
     .subscribe(res =>{
+      console.log('el user id es:');
+      
       console.log(res);
       this.userId = res['UserId'];
-      this.userService.getdataUser(this.userId)
-      .subscribe(res =>{
-        console.log('si se trajo las alertas');
-        this.userService.getAlertsData(res['_id'])
-        .subscribe(res =>{
-          console.log('Aqui empiezan las alertas');
-          console.log(res);
-          console.log('aqui termian las alertas');
-          
-        })
+      this.alertService.getAlerts()
+      .subscribe(res=>{
+        console.log('esto solo se ve aqui');
+        console.log(typeof res);
+        const json = JSON.stringify(res)
+        const datajson = JSON.parse(json);
+        console.log(' mi json es');
+        console.log(datajson);
         
-        console.log('los values del user: ');
+        for (let index = 0; index < datajson.length; index++) {
+          // const element = array[index];
+          if (datajson[index].id_user === this.userId) {
+            console.log('*************************');
+            console.log(datajson[index]);
+            this.listAlerts.push(datajson[index])
+            console.log('asi quedan las alertas');
+            
+            console.log(this.listAlerts);
+            
+          }else{
+            console.log('NO ENTRE AL MALDITO IF');
+            
+          }
+        }
+        // const index = datajson.findIndex(item => item.id_user === this.userId);
+         
+        // console.log('********** esto saca index *********');
         
-        console.log(res);
-        
-        
-      });
+        // console.log(index)
+        // console.log(datajson[index])
+      })
     });
   }
 
