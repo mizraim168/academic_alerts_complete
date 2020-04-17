@@ -237,6 +237,10 @@
     <div *ngIf="alertService.alerts.length>0">
     
         <h1 class="title">Mis alertas</h1>
+        <div>
+            Buscar alertas por matrícula y por nombre
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Empieza a escribir para buscar">
+        </div>
 
         <a class="waves-effect waves-light btn" (click)="createReport()" ><i class="material-icons right">cloud_download</i>Descargar Reporte</a>
 
@@ -252,7 +256,7 @@
                     
                 </thead>
                 <tbody >
-                    <tr *ngFor="let alert of listAlerts">
+                    <tr *ngFor="let alert of listAlerts|filter:searchText">
                         <td>{{alert.matricula}}</td>
                         <td>{{alert.student_name}}</td>
                         <td>{{alert.educational_program}}</td>

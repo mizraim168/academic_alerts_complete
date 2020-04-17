@@ -21,29 +21,43 @@
         <div class="col s12">
           <div class="card blue-grey darken-1" >
             <div class="card-content white-text">
+              <span>Fecha de inicio: {{x.date|date}}</span>
               <span class="card-title">{{x.student_name}} - {{x.matricula}}</span>
-              <p>{{x.incidence}}</p>
+              <p>Incidencia: {{x.incidence}}</p>
+              <p>Primer seguimiento: {{x.tracing}}</p>
             </div>
             <div class="card-action">
                 
                 <div class="input-field ">
                   
-                    <i class="material-icons prefix">mode_edit</i>
+                    
                     <!-- name="comments" #comments="ngModel" [(ngModel)]="alertService.selectedAlert.comments" -->
-                      <textarea  id="icon_prefix2" class="materialize-textarea"></textarea> 
+                    <!-- <textarea  id="icon_prefix2" class="materialize-textarea"></textarea>  -->
                     
                     
-                    <label for="icon_prefix2">Nueva actividad </label>
+                    
                     
                     <div class="row">
-                        <div ><a  class="waves-effect waves-light btn"><i class="material-icons right">send</i>Enviar</a>
-                          
+                      <form #commentForm='ngForm'>
+                        <!-- <input type="hidden"  name="alert" #alert="ngModel" [(ngModel)]= "alertId"> -->
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "commentService.selectedComment._id">
+                        <div class="input-field">
+                          <i class="material-icons prefix">mode_edit</i>
+                          <input type="textarea" name="comment" #comments="ngModel" [(ngModel)]="commentService.selectedComment.comment">
+                          <label for="icon_prefix2">Nueva actividad </label> 
                         </div>
+                       
+                        <div ><a (click)="comment(commentForm)" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Enviar</a></div>
+                      </form>
+                        
+                          
+                        
                         <!-- <div class="col"><a class="waves-effect waves-light btn"><i class="material-icons right">attach_file</i>Add file</a></div> -->
                         <div>
                           
                         </div>
-                        <div class="row" *ngIf="check == true" >
+                        <!-- *ngIf="check == true" -->
+                        <div class="row"  >
                           <form [formGroup] = "fileService.uploadForm" (ngSubmit)="onSubmit()">      
                             <div class = "file-field input-field">
                               <div class = "btn">

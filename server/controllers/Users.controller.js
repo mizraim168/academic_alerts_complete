@@ -18,9 +18,9 @@ const emailMessage = `
   </head>
   <body>
 
-    <h1>¡Gracias por formar parte de Alertas acádemicas!<h1>
+    <h1>¡Gracias por formar parte de Alertas académicas!<h1>
     <p>El último paso es verificar tu cuenta dando click en el siguiente botón</p>
-    <button class="btn" style=" border: solid 1px black; border-raidus:25px; background-color:blue;">Verificar cuenta</button>
+    <a class="btn" style=" border: solid 1px black; border-raidus:25px; background-color:blue;"  href="http://localhost:4200/main/home">Verificar cuenta</a>
 
   </body>
 </html>
@@ -249,7 +249,7 @@ function emailSettings(){
     // setup e-mail data with unicode symbols
     let mailOptions = {
         from: 'Test <testarv63@gmail.com>', // sender address
-        to: 'mizraimeliab168@gmail.com', // list of receivers
+        to: '180115@utags.edu.mx', // list of receivers //mizraimeliab168@gmail.com
         subject: 'Hello ✔', // Subject line
         html: emailMessage // html body
         

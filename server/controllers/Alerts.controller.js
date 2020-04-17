@@ -26,6 +26,13 @@ alertController.getAlert = async (req , res) =>{
     res.json(getUsAlerts);
 }
 
+alertController.comments = async (req , res) =>{
+    await alert.find().populate('comment').exec((err, response)=>
+    {
+        res.json(response)
+    })
+}
+
 // /POST new alert
 alertController.createAlert = async (req, res) => {
     const newAlert = new alert({
@@ -34,8 +41,8 @@ alertController.createAlert = async (req, res) => {
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
         tracing: req.body.tracing,
-        id_user: req.body.id_user
-        // comment: req.body.comment
+        id_user: req.body.id_user,
+        comment: req.body.comment
         // date: fulldate
     });
     await newAlert.save();
@@ -52,8 +59,8 @@ alertController.editAlert = async (req, res) =>{
         educational_program: req.body.educational_program,
         incidence: req.body.incidence,
         tracing:  req.body.tracing,
-        id_user: req.body.id_user
-        // comment: req.body.comment
+        id_user: req.body.id_user,
+        comment: req.body.comment
     };
     await alert.findByIdAndUpdate(id, {$set: oneAlert}, {new:true} );
     res.json({

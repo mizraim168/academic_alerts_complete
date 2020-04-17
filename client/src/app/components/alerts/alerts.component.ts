@@ -19,6 +19,7 @@ declare let M: any;
   providers: [AlertService, UserService]
 })
 export class AlertsComponent implements OnInit {
+  searchText; 
   valueCategory = '';
   val:string
   listAlerts: Array<any> = [];

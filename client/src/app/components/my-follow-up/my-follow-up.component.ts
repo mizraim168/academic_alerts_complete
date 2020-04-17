@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FilesService} from '../../services/files.service';
 import {AlertService} from '../../services/alert.service';
 import {UserService} from '../../services/user.service';
+import {CommentsService} from '../../services/comments.service';
+import {Comments} from '../../models/comments';
 import {User} from '../../models/user'; 
 import { NgForm } from '@angular/forms';
 import {Alert} from '../../models/alert';
@@ -14,7 +16,7 @@ declare let M: any;
   selector: 'app-my-follow-up',
   templateUrl: './my-follow-up.component.html',
   styleUrls: ['./my-follow-up.component.css'],
-  providers: [AlertService, UserService]
+  providers: [AlertService, UserService, CommentsService]
  
 })
 
@@ -26,7 +28,8 @@ export class MyFollowUpComponent implements OnInit {
   listFiles: Array<string> = [];
   check: boolean;
   userId:string;
-  constructor(public fileService:FilesService, public alertService: AlertService, public userService: UserService ) { }
+  alertId:string;
+  constructor(public commentService: CommentsService, public fileService:FilesService, public alertService: AlertService, public userService: UserService ) { }
 
   ngOnInit(): void {
     this.fileService.uploadForm = this.fileService.formBuilder.group({
@@ -34,6 +37,7 @@ export class MyFollowUpComponent implements OnInit {
     });
     this.getAlerts();
     this.getUser();
+    // this.alertId = this.alertService.selectedAlert._id;
   }
 
   // getUser(){
@@ -61,6 +65,15 @@ export class MyFollowUpComponent implements OnInit {
   //     });
   //   });
   // }
+
+  comment(comment:NgForm){
+    this.commentService.postComment(comment.value)
+    .subscribe(res=>{
+      console.log('las response es:');
+      console.log(res);
+      
+    });
+  }
 
 
   getUser(){

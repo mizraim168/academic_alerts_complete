@@ -11,18 +11,18 @@ commentsController.getComments = async (req, res) =>{
     res.json(comments);
 } 
 // /GET only data comments with alerts
-commentsController.DataComment = async (req , res) =>{
+// commentsController.DataComment = async (req , res) =>{
     // await alert.find().populate('comment').exec((err, response)=>
     // {
     //     res.json(response)
     // })
-    await comment.find().populate('alert').exec((err, response)=>
-    {
-        res.json(response)
-    })
+    // await comment.find().populate('alert').exec((err, response)=>
+    // {
+    //     res.json(response)
+    // })
     // const getUsComment = await comment.findById(req.params.id);
     // res.json(getUsComment);
-}
+// }
 
 // /POST new comment
 commentsController.NewComment = async (req, res) => {

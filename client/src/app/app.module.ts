@@ -25,6 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 const appRoutes: Routes = [
   //Roting loggin with another pages
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     GeneralFollowComponent,
     MainComponent,
     LoginComponent,
-    UserSettingsComponent,
+    UserSettingsComponent
+
 
   ],
   imports: [
@@ -67,6 +70,7 @@ const appRoutes: Routes = [
     MatListModule,
     ReactiveFormsModule,
     MatInputModule,
+    Ng2SearchPipeModule,
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
