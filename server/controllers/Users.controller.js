@@ -20,7 +20,7 @@ const emailMessage = `
 
     <h1>¡Gracias por formar parte de Alertas académicas!<h1>
     <p>El último paso es verificar tu cuenta dando click en el siguiente botón</p>
-    <a class="btn" style=" border: solid 1px black; border-raidus:25px; background-color:blue;"  href="http://localhost:4200/main/home">Verificar cuenta</a>
+    <a class="waves-effect waves-light btn"  href="http://localhost:4200/main/home">Verificar cuenta</a>
 
   </body>
 </html>
@@ -126,7 +126,7 @@ userController.createUser = async (req, res) => {
     //Create access token
     const accessToken = jwt.sign({_id: newUser._id}, Secret_Key);
     // Function with email settings
-    emailSettings();
+    emailSettings(req, res);
     res.json({
         status: "User saved",
         token: accessToken
@@ -234,7 +234,7 @@ function verifyToken  (req, res , next){
   
 }
 
-function emailSettings(){
+function emailSettings(req, res){
     //EMAIL BLOCK CODE START
 
     let transporter = nodemailer.createTransport({
@@ -249,7 +249,7 @@ function emailSettings(){
     // setup e-mail data with unicode symbols
     let mailOptions = {
         from: 'Test <testarv63@gmail.com>', // sender address
-        to: '180115@utags.edu.mx', // list of receivers //mizraimeliab168@gmail.com
+        to: 'mizraimeliab168@gmail.com', // list of receivers //mizraimeliab168@gmail.com
         subject: 'Hello ✔', // Subject line
         html: emailMessage // html body
         

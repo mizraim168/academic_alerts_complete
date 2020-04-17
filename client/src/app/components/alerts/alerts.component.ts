@@ -40,7 +40,7 @@ export class AlertsComponent implements OnInit {
       this.getAlerts();
       this.getUser();
       this.userId = this.alertService.selectedAlert.id_user;
-      
+  
   }
   // getUser(){
   //   this.userService.getUser()
@@ -90,7 +90,7 @@ export class AlertsComponent implements OnInit {
             console.log(datajson[index]);
             this.listAlerts.push(datajson[index])
             console.log('asi quedan las alertas');
-            
+
             console.log(this.listAlerts);
             
           }else{
@@ -98,15 +98,11 @@ export class AlertsComponent implements OnInit {
             
           }
         }
-        // const index = datajson.findIndex(item => item.id_user === this.userId);
-         
-        // console.log('********** esto saca index *********');
-        
-        // console.log(index)
-        // console.log(datajson[index])
+
       })
     });
   }
+
 
 
   paver(){
@@ -155,7 +151,7 @@ export class AlertsComponent implements OnInit {
         this.resetForm(form);
         M.toast({html: 'Alerta actualizada correctamente'})
         this.getAlerts();
-        
+        location.reload(); 
       });
     }else{
       this.alertService.postAlert(form.value)
@@ -164,6 +160,7 @@ export class AlertsComponent implements OnInit {
         this.resetForm(form);
         M.toast({html: 'Alerta guardada correctamente'})
         this.getAlerts();
+        location.reload(); 
       });
     }
    
@@ -188,7 +185,9 @@ export class AlertsComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.getAlerts();
+        
         M.toast({html: 'Alerta eliminada correctamente'})
+        location.reload(); 
       });
      
 

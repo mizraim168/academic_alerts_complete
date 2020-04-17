@@ -10,6 +10,7 @@ declare let M: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  regexp = new RegExp(/^[_A-Za-z\\+]+(\\.[_A-Za-z]+)*@utags.edu.mx$/);
   get primEmail(){
     return this.user.get('email')
   }
@@ -59,30 +60,37 @@ export class LoginComponent implements OnInit {
 
 
   login(){
-    this.loginService.postLogin(this.user.value)
-    .subscribe(res =>{
-      console.log(res);
-      let data = JSON.stringify(res);
-      let dataJson = JSON.parse(data);
-      localStorage.setItem('token', dataJson.token)
-      if(dataJson.token){
-        M.toast({html: '¡Hola ' + dataJson.UserName +' bienvenido!. 😃'})
-        this.router.navigate(['/main/home']);
-      }else{
-        M.toast({html: 'Lo sentimos no encontramos la cuenta. 😥'})
-        console.log('Something was wrong :(');
-        console.log(this.primEmail.value);
-        console.log(this.primPass.value);
-        
-        
-      }
+    if (this.regexp.test(this.primEmail.value)) {
       
-
-      
-    },
-    err =>console.log(err)
-    )
     
+      this.loginService.postLogin(this.user.value)
+      .subscribe(res =>{
+        console.log(res);
+        let data = JSON.stringify(res);
+        let dataJson = JSON.parse(data);
+        localStorage.setItem('token', dataJson.token)
+        if(dataJson.token){
+          M.toast({html: '¡Hola ' + dataJson.UserName +' bienvenido!. 😃'})
+          this.router.navigate(['/main/home']);
+        }else{
+          M.toast({html: 'Lo sentimos no encontramos la cuenta. 😥'})
+          console.log('Something was wrong :(');
+          console.log(this.primEmail.value);
+          console.log(this.primPass.value);
+          
+          
+        }
+        
+
+        
+      },
+      err =>console.log(err)
+      )
+      
+    }else{
+      M.toast({html: 'Lo sentimos no encontramos la cuenta. 😥'})
+    }
+
   }
 
 

@@ -25,6 +25,7 @@
               <span class="card-title">{{x.student_name}} - {{x.matricula}}</span>
               <p>Incidencia: {{x.incidence}}</p>
               <p>Primer seguimiento: {{x.tracing}}</p>
+              <p>comentarios: {{x.comment}}</p>
             </div>
             <div class="card-action">
                 
@@ -43,7 +44,7 @@
                         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "commentService.selectedComment._id">
                         <div class="input-field">
                           <i class="material-icons prefix">mode_edit</i>
-                          <input type="textarea" name="comment" #comments="ngModel" [(ngModel)]="commentService.selectedComment.comment">
+                          <input type="text" name="comment" #comments="ngModel" [(ngModel)]="commentService.selectedComment.comment">
                           <label for="icon_prefix2">Nueva actividad </label> 
                         </div>
                        

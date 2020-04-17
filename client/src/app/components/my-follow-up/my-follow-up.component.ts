@@ -25,6 +25,7 @@ declare let M: any;
 export class MyFollowUpComponent implements OnInit {
   
   listAlerts: Array<any> = [];
+  listComments: Array<any> = [];
   listFiles: Array<string> = [];
   check: boolean;
   userId:string;
@@ -101,6 +102,11 @@ export class MyFollowUpComponent implements OnInit {
             console.log('asi quedan las alertas');
             
             console.log(this.listAlerts);
+            if(datajson[index].comment.length === 0 ){
+              console.log('si existe el campo');
+              console.log(datajson[index].comment);
+              
+            }
             
           }else{
             console.log('NO ENTRE AL MALDITO IF');
