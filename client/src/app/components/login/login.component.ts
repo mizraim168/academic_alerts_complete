@@ -10,7 +10,7 @@ declare let M: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  regexp = new RegExp(/^[_A-Za-z\\+]+(\\.[_A-Za-z]+)*@utags.edu.mx$/);
+  regexp = new RegExp('^[_A-Za-z\\+]+(\\.[_A-Za-z]+)*@utags.edu.mx$');
   get primEmail(){
     return this.user.get('email')
   }

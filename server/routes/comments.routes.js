@@ -6,7 +6,7 @@ const commentsController = require('../controllers/Comments.controller');
     // comments routing
     router.get('/', commentsController.getComments);
     router.post('/', commentsController.NewComment);
-    // router.get('/data/', commentsController.DataComment);
+    router.get('/data', commentsController.DataComment);
     router.delete('/:id', commentsController.deleteComment);
     // router.put('/:id', userController.editUser);
 

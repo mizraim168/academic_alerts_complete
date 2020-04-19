@@ -1,5 +1,5 @@
 export class Alert {
-    constructor(_id = '', matricula = '', student_name ='', educational_program='',incidence='',tracing='', comment = '', id_user = ''){
+    constructor(_id = '', matricula = '', student_name ='', educational_program='',incidence='',tracing='', id_user = ''){
         this._id = _id;
         this.matricula = matricula;
         this.student_name = student_name;
@@ -7,7 +7,7 @@ export class Alert {
         this.incidence = incidence;
         this.tracing = tracing;
         this.id_user = id_user;
-        this.comment = comment;
+        
 
     }
     _id:string;
@@ -17,5 +17,6 @@ export class Alert {
     incidence:string;
     tracing:string;
     id_user:string;
-    comment: string;
+   
+
 }

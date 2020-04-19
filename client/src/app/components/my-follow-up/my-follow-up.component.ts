@@ -28,17 +28,26 @@ export class MyFollowUpComponent implements OnInit {
   listComments: Array<any> = [];
   listFiles: Array<string> = [];
   check: boolean;
+  id_alert: string;
   userId:string;
   alertId:string;
+  push:string
+  comentario = {
+    comment: '',
+    alert: '',
+    id_alert: ''
+  }
   constructor(public commentService: CommentsService, public fileService:FilesService, public alertService: AlertService, public userService: UserService ) { }
-
+  
   ngOnInit(): void {
     this.fileService.uploadForm = this.fileService.formBuilder.group({
       profile: ['']
     });
     this.getAlerts();
     this.getUser();
+    this.verComentarios()
     // this.alertId = this.alertService.selectedAlert._id;
+    // this.alertService.selectedAlert.comment = "";
   }
 
   // getUser(){
@@ -67,14 +76,6 @@ export class MyFollowUpComponent implements OnInit {
   //   });
   // }
 
-  comment(comment:NgForm){
-    this.commentService.postComment(comment.value)
-    .subscribe(res=>{
-      console.log('las response es:');
-      console.log(res);
-      
-    });
-  }
 
 
   getUser(){
@@ -100,13 +101,14 @@ export class MyFollowUpComponent implements OnInit {
             console.log(datajson[index]);
             this.listAlerts.push(datajson[index])
             console.log('asi quedan las alertas');
+           
             
             console.log(this.listAlerts);
-            if(datajson[index].comment.length === 0 ){
-              console.log('si existe el campo');
-              console.log(datajson[index].comment);
+            // if(datajson[index].comment.length === 0 ){
+            //   console.log('si existe el campo');
+            //   console.log(datajson[index].comment);
               
-            }
+            // }
             
           }else{
             console.log('NO ENTRE AL MALDITO IF');
@@ -122,6 +124,56 @@ export class MyFollowUpComponent implements OnInit {
       })
     });
   }
+
+  comment( form: NgForm){
+    if (form.value._id) {
+      console.log(form.value);
+      this.comentario.comment = form.value.comment;
+      this.comentario.alert = form.value._id;
+      this.comentario.id_alert = form.value._id;
+      console.log('mi nuevo obj es:' );
+    
+      
+      console.log(this.comentario);
+      
+      this.commentService.postComment(this.comentario)
+      .subscribe(res => {
+        console.log(res);
+        // this.resetForm(form);
+      
+        
+        M.toast({html: 'Comentario agregado'})
+        this.getAlerts();
+        // location.reload(); 
+
+      });  
+    }
+    //  if (form.value.comment){
+        // console.log('entro a el if de nuevo comentario');
+        
+        // this.alertService.postAlert(form.value.comment)
+        // .subscribe(res =>{
+        //   console.log('nuevo comentario es: ');
+          
+        //   console.log(res);
+          
+        // })
+    // }
+  
+    
+
+  }
+
+  getAlertId(alert : Alert, event){
+    this.alertService.selectedAlert = alert;
+    console.log(alert);
+    this.id_alert = alert._id
+    console.log('mi evento es');
+    console.log(event.type);
+    this.push = event.type;
+    
+    // this.userService.putUser()
+  }
   onFileSelect(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -130,6 +182,28 @@ export class MyFollowUpComponent implements OnInit {
       this.fileService.uploadForm.get('profile').setValue(file);
     }
   }
+
+  verComentarios(){
+    this.commentService.getComments()
+    .subscribe(res =>{
+      console.log('comentarios de las alertas son');
+      console.log(res);
+     
+        console.log('el alert id es:');
+      console.log(this.id_alert);
+      this.listComments.push(res)
+      
+      // this.listComments.push(res)
+      // console.log(this.listComments);
+      // console.log('el alert id es:');
+      // console.log(this.id_alert);
+      // this.listComments.push(res)
+
+      
+      
+    });
+  }
+
 
   onSubmit() {
     const formData = new FormData();

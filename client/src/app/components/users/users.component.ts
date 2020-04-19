@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { from } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import {Router } from '@angular/router'
 
 declare let M: any;
 @Component({
@@ -12,6 +13,8 @@ declare let M: any;
 })
 export class UsersComponent implements OnInit {
   checkB:Boolean;
+  repetPassword:String
+  regexp = new RegExp('^[_A-Za-z\\+]+(\\.[_A-Za-z]+)*@utags.edu.mx$');
   // user = {
   //   name : '',
   //   lastname: '',
@@ -20,7 +23,7 @@ export class UsersComponent implements OnInit {
   //   password: '',
   //   role: ''
   // }
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, public router:Router) {
 
    }
 
@@ -38,13 +41,22 @@ export class UsersComponent implements OnInit {
   }
 
   addUser(form: NgForm){
-    this.userService.postUser(form.value)
+    if (this.repetPassword != this.userService.selectedUser.password) {
+      M.toast({html: 'Error las contraseñas no son iguales, no creamos tu usuario 😕'})
+      this.router.navigate(['/users'])
+    }else if (this.regexp.test(this.userService.selectedUser.email)){
+      this.userService.postUser(form.value)
       .subscribe(res => {
         console.log(res);
         let data = JSON.stringify(res);
         let dataJson = JSON.parse(data);
         localStorage.setItem('token', dataJson.token);
       });
+    }else{
+      M.toast({html: 'Error el correo no cumple con las condiciones, no creamos tu usuario 😕'})
+      this.router.navigate(['/users'])
+    }
+   
   }
 
  

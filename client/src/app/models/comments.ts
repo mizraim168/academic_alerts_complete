@@ -1,10 +1,12 @@
 export class Comments {
-    constructor(_id = '', comment = '', alert=""){
-        this._id = _id;
+    constructor( comment = '', alert='', id_alert=''){
+        
         this.comment = comment;
-        this.alert = alert="";
+        this.alert = alert= "";
+        this.id_alert = id_alert;
     }   
-    _id:string;
+   
     comment:string;
     alert:string;
+    id_alert:string;
 }

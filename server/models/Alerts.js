@@ -8,7 +8,7 @@ const alerts = new Schema({
     incidence: { type: String, required: false },
     tracing: { type: String, required: false },
     id_user : {type: Number },
-    comment: [{type: String}],
+    // comment: [{type: String}],
     // comment: [{type: Schema.ObjectId, ref: "Comment"}],
     date: {type: Date, default: Date.now}
 });

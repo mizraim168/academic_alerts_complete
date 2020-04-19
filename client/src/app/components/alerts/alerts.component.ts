@@ -152,6 +152,8 @@ export class AlertsComponent implements OnInit {
         M.toast({html: 'Alerta actualizada correctamente'})
         this.getAlerts();
         location.reload(); 
+        
+        
       });
     }else{
       this.alertService.postAlert(form.value)

@@ -118,7 +118,8 @@ userController.createUser = async (req, res) => {
         email: req.body.email,
         password: hash,
         role: req.body.role,
-        alerts: req.body.alerts
+        alerts: req.body.alerts,
+        direction: req.body.direction
     }
     const newUser = new user(OneUser)
     await newUser.save();
@@ -199,7 +200,8 @@ userController.editUser = async (req, res) =>{
         email: req.body.email,
         password: hash,
         confirm_password: req.body.confirm_password,
-        role: req.body.role
+        role: req.body.role,
+        direction: req.body.direction
     };
     await user.findByIdAndUpdate(id, {$set: oneUser}, {new:true} );
     res.json({
