@@ -3,14 +3,14 @@ const comment = require('../models/Comments');
 
 const commentsController = {};
 
-// /GET all comments
+// Obtener todos los comentarios
 
 commentsController.getComments = async (req, res) =>{
     
     const comments = await comment.find();
     res.json(comments);
 } 
-// /GET only data comments with alerts
+// Obtener los comentarios con alertas
 commentsController.DataComment = async (req , res) =>{
     // await alert.find().populate('comment').exec((err, response)=>
     // {

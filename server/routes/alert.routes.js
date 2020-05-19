@@ -3,10 +3,11 @@ const router = express.Router();
 const alertController = require('../controllers/Alerts.controller');
 
 
-    // alerts routing
+    // Ruteo alertas
     router.get('/', alertController.getAlerts);
     router.get('/comments', alertController.comments);
     router.post('/', alertController.createAlert);
+    router.post('/comments/:id', alertController.comments);
     router.post('/file', alertController.uploadFile);
     router.get('/download/:file(*)', alertController.download);
     router.get('/:id', alertController.getAlert);

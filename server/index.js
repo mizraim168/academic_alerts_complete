@@ -1,3 +1,4 @@
+// Librerias requeridas
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -5,7 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
 const uuid = require('uuid/v4');
-
+// Configuración de librerias
 const storegeMulterConfig = multer.diskStorage({
     destination: 'server/public/uploads',
     filename: (req, file, cb) =>{  
@@ -29,16 +30,16 @@ const multerConfig = multer({
 
 const { mongoose} = require('./database');
 
-//Settings
+//Settings (Configuraciones)
 app.set('port', process.env.PORT || 3000);
 
-//Middleswares
+//Middleswares (Uso de librerias)
 app.use(morgan('dev'));
 app.use(express.json())
 app.use(cors({origin: 'http://localhost:4200'}));
 app.use(multerConfig);
 
-//Routes
+//Routes (Inicialización de rutasde la rest API)
 app.use('/users',require('./routes/users.routes'));
 app.use('/alerts',require('./routes/alert.routes'));
 app.use('/comments',require('./routes/comments.routes'));
@@ -46,6 +47,7 @@ app.use('/comments',require('./routes/comments.routes'));
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Inicialización del puerto del servidor
 app.listen(3000, ()=> {
     console.log("Server On Port ", app.get('port'))
 });

@@ -3,7 +3,7 @@ const router = express.Router();
 const commentsController = require('../controllers/Comments.controller');
 
 
-    // comments routing
+    // Ruteo de comentarios
     router.get('/', commentsController.getComments);
     router.post('/', commentsController.NewComment);
     router.get('/data', commentsController.DataComment);

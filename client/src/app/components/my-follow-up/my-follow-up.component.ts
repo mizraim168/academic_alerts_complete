@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  Input } from '@angular/core';
 import {FilesService} from '../../services/files.service';
 import {AlertService} from '../../services/alert.service';
 import {UserService} from '../../services/user.service';
@@ -7,7 +7,8 @@ import {Comments} from '../../models/comments';
 import {User} from '../../models/user'; 
 import { NgForm } from '@angular/forms';
 import {Alert} from '../../models/alert';
-import { stringify } from 'querystring';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 declare let M: any;
 
 
@@ -23,13 +24,14 @@ declare let M: any;
 
 
 export class MyFollowUpComponent implements OnInit {
-  
   listAlerts: Array<any> = [];
   listComments: Array<any> = [];
   listFiles: Array<string> = [];
   check: boolean;
   id_alert: string;
+  message: string;
   userId:string;
+  name:string;
   alertId:string;
   push:string
   comentario = {
@@ -37,15 +39,23 @@ export class MyFollowUpComponent implements OnInit {
     alert: '',
     id_alert: ''
   }
-  constructor(public commentService: CommentsService, public fileService:FilesService, public alertService: AlertService, public userService: UserService ) { }
+  constructor(public router:Router,public commentService: CommentsService, public fileService:FilesService, public alertService: AlertService, public userService: UserService,private route: ActivatedRoute ) { 
+    this.alertService.id_global;
+    
+  }
   
-  ngOnInit(): void {
+  ngOnInit() {
     this.fileService.uploadForm = this.fileService.formBuilder.group({
       profile: ['']
     });
+    this.route.queryParams.subscribe(params => {
+      this.name = params['name'];
+    }); 
+
     this.getAlerts();
     this.getUser();
     this.verComentarios()
+   
     // this.alertId = this.alertService.selectedAlert._id;
     // this.alertService.selectedAlert.comment = "";
   }
@@ -136,17 +146,17 @@ export class MyFollowUpComponent implements OnInit {
       
       console.log(this.comentario);
       
-      this.commentService.postComment(this.comentario)
-      .subscribe(res => {
-        console.log(res);
-        // this.resetForm(form);
+      // this.commentService.postComment(this.comentario)
+      // .subscribe(res => {
+      //   console.log(res);
+      //   // this.resetForm(form);
       
         
-        M.toast({html: 'Comentario agregado'})
-        this.getAlerts();
-        // location.reload(); 
+      //   M.toast({html: 'Comentario agregado'})
+      //   this.getAlerts();
+      //   // location.reload(); 
 
-      });  
+      // });  
     }
     //  if (form.value.comment){
         // console.log('entro a el if de nuevo comentario');
@@ -189,7 +199,7 @@ export class MyFollowUpComponent implements OnInit {
       console.log('comentarios de las alertas son');
       console.log(res);
      
-        console.log('el alert id es:');
+      console.log('el alert id es:');
       console.log(this.id_alert);
       this.listComments.push(res)
       
@@ -202,6 +212,14 @@ export class MyFollowUpComponent implements OnInit {
       
       
     });
+  }
+
+  details(_id:string){
+    console.log('los details son');
+    this.message = _id;
+    console.log(_id);
+    
+    this.router.navigate(['/main/alertDetails'], {queryParams: {_id}})
   }
 
 

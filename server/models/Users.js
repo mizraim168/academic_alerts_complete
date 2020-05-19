@@ -3,11 +3,8 @@ const autoIncrement = require('mongoose-auto-increment');
 const { Schema } = mongoose;
 
 autoIncrement.initialize(mongoose);
-
+//Creación del esquema de usuarios
 const users = new Schema({
-    // email: {type: String, required: true},
-    // password: {type: String, required:true}
-
     name: {type: String, required: true},
     lastname: {type: String, required: true},
     motherlastname: {type: String, required: true},

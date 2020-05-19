@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/Users.controller');
 const alertController = require('../controllers/Alerts.controller');
 
-    // Login routing
+    // Ruteo de usuarios 
     router.get('/', userController.getUsers);
     router.get('/profile', userController.profile);
     router.get('/data/:id', userController.completeData);

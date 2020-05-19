@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
+// Creación de esquema de alertas
 const alerts = new Schema({
     matricula: { type: Number, required: false },
     student_name: { type: String, required: false },

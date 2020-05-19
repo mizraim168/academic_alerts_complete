@@ -26,6 +26,7 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
 import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AlertDetailsComponent } from './components/alert-details/alert-details.component';
 
 
 const appRoutes: Routes = [
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   children: [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
+    { path: 'alertDetails', component: AlertDetailsComponent, canActivate: [AuthGuard] },
     { path: 'MyFollow', component: MyFollowUpComponent, canActivate: [AuthGuard] },
     { path: 'GeneralFollow', component: GeneralFollowComponent, canActivate: [AuthGuard] },
     {path: 'account', component: UserSettingsComponent, canActivate: [AuthGuard]}
@@ -52,9 +54,11 @@ const appRoutes: Routes = [
     AlertsComponent,
     MyFollowUpComponent,
     GeneralFollowComponent,
+    AlertDetailsComponent,
     MainComponent,
     LoginComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    AlertDetailsComponent
 
 
   ],

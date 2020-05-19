@@ -1,3 +1,4 @@
+// Conexión a la base de datos
 const mongoose = require('mongoose');
 
 const URI = 'mongodb://localhost/test_complete';

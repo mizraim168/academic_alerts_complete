@@ -1,4 +1,5 @@
 const alert = require('../models/Alerts');
+const comment = require('../models/Comments');
 const path = require('path');
 const alertController = {};
 
@@ -14,16 +15,23 @@ let min = hoy.getMinutes();
 // let fulldate = dd + '/' + mm + '/' + yyyy ;
 
 
-// /GET all alerts
+// Obtener todas las alertas
 
 alertController.getAlerts = async (req, res) =>{
    const alerts =  await alert.find();
    res.json(alerts);
 } 
-// /GET only one alert
+// Obtener una alerta
 alertController.getAlert = async (req , res) =>{
     const getUsAlerts = await alert.findById(req.params.id);
-    res.json(getUsAlerts);
+    const comments = await comment.find({alert: getUsAlerts._id})
+    // console.log(comments);
+    res.json({
+        datosAlerta: getUsAlerts,
+        comentarios: comments
+    })
+    
+    // res.json(getUsAlerts);
 }
 
 alertController.comments = async (req , res) =>{
@@ -33,7 +41,7 @@ alertController.comments = async (req , res) =>{
     })
 }
 
-// /POST new alert
+// Crear nueva alerta
 alertController.createAlert = async (req, res) => {
     const newAlert = new alert({
         matricula: req.body.matricula,
@@ -50,7 +58,7 @@ alertController.createAlert = async (req, res) => {
         status: "Alert saved"
     });
 }
-// /PUT update user
+// Actualiza alerta
 alertController.editAlert = async (req, res) =>{
     const {id} = req.params;
     const oneAlert = {
@@ -68,7 +76,7 @@ alertController.editAlert = async (req, res) =>{
     })
 }
 
-// /DELETE user
+// Eliminar alerta
 alertController.deleteAlert = async (req, res) =>{
     await alert.findByIdAndRemove(req.params.id);
     res.json({
@@ -76,8 +84,31 @@ alertController.deleteAlert = async (req, res) =>{
     })
 }
 
+alertController.comments = async(req, res) =>{
+    console.log(req.body)
+    const alertData = await alert.findOne({_id: req.params.id})
+    console.log('la consulta es');
+    console.log(alertData);
+    if (alertData) {
+        const newComment = new comment(req.body)
+        newComment.alert = alertData._id
+        console.log('lo que obtengo es');
+        
+        console.log(newComment);
+        await newComment.save();
+        // res.send('si jala')
+        res.json(newComment);
+    }
+    
+    // console.log(req.params.id);
+    
+    
+    
+    
+}
 
-//methos with files works!
+
+//methos with files works! Subir archivos
 alertController.uploadFile = async (req, res) =>{
     // res.send('si jala');
   
@@ -93,7 +124,7 @@ alertController.uploadFile = async (req, res) =>{
         }
     );
 }
-
+// Descargar archivos
 alertController.download = async (req, res ) =>{
     let file = req.params.file;
     let file_location = path.join('server/public/uploads', file);

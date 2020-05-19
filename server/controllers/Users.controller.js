@@ -1,13 +1,14 @@
+// Librerias requeridas
 const user = require('../models/Users');
 const alert = require('../models/Alerts');
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt');
 const Secret_Key = 'secret_key_utags';
-const saltRounds = 10; //for production mode set 12 saltRounds
+const saltRounds = 12; //for production mode set 12 saltRounds
 
 const userController = {};
-
+// Vista del correo electrónico
 const emailMessage = `
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -27,7 +28,7 @@ const emailMessage = `
 
 `
 
-// /GET all users
+// Obtener todos los usuarios
 
 userController.getUsers = async (req, res) =>{
     
@@ -37,21 +38,10 @@ userController.getUsers = async (req, res) =>{
    
 } 
 
+// Relación de usuarios con alertas
 userController.completeData = async (req, res) =>{
-        // tomar el id del usuario actual
-        // verifyToken(req, res);
-        // const el_id = req.userId;
-        // console.log('el id chido');
-        // console.log( el_id);
-        // const id_final = el_id.toString();
-        // console.log('el id final es:');
-        // console.log(id_final);
-    
-    // res.json({UserId: req.userId})
     const collName = alert.collection.collectionName;
     console.log(collName);
-
-
     // const getUs = await user.findById(req.params.id)
     // res.json(getUs._id); 
     // const el_id_chido = getUs._id;
@@ -65,12 +55,8 @@ userController.completeData = async (req, res) =>{
           as: 'Alerts'
         }
     }], (err, userData) =>{
-    
         // console.log('el id del user');
-        
         // console.log(el_id_chido);
-        
-
         console.log(Object.keys(userData));
         
         const data = userData[0].Alerts[0]; //pasar el id
@@ -81,15 +67,8 @@ userController.completeData = async (req, res) =>{
         //  userDa.save();
         res.json(userData);
     })
-//     // console.log('la query es: *************');
-//     // console.log(query);
-    
-    
-
-
-    // res.json(data)
 }
-// /GET only one user
+// Obtener un solo usuario
 userController.getUser = async (req , res) =>{
     // verifyToken(req, res);
     const getUs = await user.findById(req.params.id)
@@ -98,13 +77,13 @@ userController.getUser = async (req , res) =>{
 
 }
 
-
+// Obtener el perfil del usuario
 userController.profile = async (req, res) =>{
     verifyToken(req, res);
     // res.send(req.userId)
     res.json({UserId: req.userId})
 }
-// /POST new user
+// Crear un nuevo usuarios
 userController.createUser = async (req, res) => {
     // create hash password
     let pass = req.body.password;
@@ -188,7 +167,7 @@ userController.login = async (req, res) =>{
     //         )
     // }
 }
-// /PUT update user
+// Actualizar a un usuario
 userController.editUser = async (req, res) =>{
     const {id} = req.params;
     let pass = req.body.password;
@@ -209,7 +188,7 @@ userController.editUser = async (req, res) =>{
     })
 }
 
-// DELETE user
+// Borrar Usuario
 userController.deleteUser = async (req, res) =>{
     await user.findByIdAndRemove(req.params.id);
     res.json({
@@ -217,7 +196,7 @@ userController.deleteUser = async (req, res) =>{
     })
 }
 
-
+// Verificación del token (jwt)
 function verifyToken  (req, res , next){
 
     if(!req.headers.authorization){
@@ -235,7 +214,7 @@ function verifyToken  (req, res , next){
     console.log(req.userId);
   
 }
-
+// Configuraciones de email
 function emailSettings(req, res){
     //EMAIL BLOCK CODE START
 
@@ -251,7 +230,7 @@ function emailSettings(req, res){
     // setup e-mail data with unicode symbols
     let mailOptions = {
         from: 'Test <testarv63@gmail.com>', // sender address
-        to: 'mizraimeliab168@gmail.com', // list of receivers //mizraimeliab168@gmail.com
+        to: req.body.email, // list of receivers //mizraimeliab168@gmail.com
         subject: 'Hello ✔', // Subject line
         html: emailMessage // html body
         
